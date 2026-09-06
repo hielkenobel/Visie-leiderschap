@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leiderschapsdossier · Tlnt H. Nobel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14181a; --bg-elev:#1b201f; --bg-elev-2:#202623;
+    --line:rgba(232,230,222,0.10); --line-strong:rgba(232,230,222,0.18);
+    --ink:#ece9e1; --ink-dim:#9aa39a; --ink-faint:#6d766d;
+    --olive:#8a9a5f; --olive-bright:#b7c98a; --sand:#c9b893;
+    --radius:2px;
+    --font-display:'Oswald',sans-serif; --font-body:'Inter',sans-serif;
+  }
+  /* theme tokens repeated per publishing contract; identity is fixed by design brief */
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+    --bg:#14181a; --bg-elev:#1b201f; --ink:#ece9e1;
+  }}
+  :root[data-theme="dark"]{ --bg:#14181a; --bg-elev:#1b201f; --ink:#ece9e1; }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:var(--font-body); font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit; text-decoration:none;}
+  img,svg{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  @media (max-width:640px){ .wrap{padding:0 20px;} }
+
+  ::selection{background:var(--olive); color:#0e1110;}
+  :focus-visible{outline:2px solid var(--olive-bright); outline-offset:3px;}
+
+  /* ---------- background texture ---------- */
+  .terrain{position:fixed; inset:0; z-index:0; pointer-events:none;}
+  .terrain path{fill:none; stroke:#8a9a5f; stroke-width:1.1; opacity:0.16;}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(20,24,26,0.92); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .progress-track{position:absolute; left:0; right:0; bottom:-1px; height:2px; background:transparent;}
+  .progress-fill{height:100%; width:0%; background:var(--olive-bright); transition:width .1s linear;}
+  .nav-row{display:flex; align-items:center; justify-content:space-between; height:76px; gap:24px;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand-icon{width:34px; height:34px; flex:none;}
+  .brand-text{display:flex; flex-direction:column; line-height:1.15;}
+  .brand-text .name{font-family:var(--font-display); font-weight:600; font-size:17px; letter-spacing:0.05em;}
+  .brand-text .sub{font-size:10.5px; letter-spacing:0.16em; color:var(--ink-faint); margin-top:2px;}
+
+  nav.primary{display:flex; align-items:center; gap:2px;}
+  nav.primary a{
+    font-size:12.5px; letter-spacing:0.09em; font-weight:500;
+    color:var(--ink-dim); padding:8px 14px; border-radius:var(--radius);
+    transition:color .15s ease;
+    position:relative;
+  }
+  nav.primary a:hover{color:var(--ink);}
+  nav.primary a .num{color:var(--olive-bright); margin-right:7px; font-family:var(--font-display); font-weight:600;}
+  nav.primary a.active{color:var(--ink);}
+  nav.primary a.active::after{content:""; position:absolute; left:14px; right:14px; bottom:0; height:2px; background:var(--olive-bright);}
+
+  .status{display:flex; align-items:center; gap:9px; font-size:11px; letter-spacing:0.14em; color:var(--ink-faint); flex:none;}
+  .status .dot{width:7px; height:7px; border-radius:50%; background:var(--olive-bright); box-shadow:0 0 8px var(--olive-bright);}
+
+  .menu-btn{display:none; background:none; border:1px solid var(--line-strong); color:var(--ink); width:40px; height:40px; border-radius:var(--radius); cursor:pointer; flex:none;}
+  .menu-btn span{display:block; width:16px; height:1.5px; background:var(--ink); margin:3px auto;}
+
+  @media (max-width:980px){
+    nav.primary{display:none;}
+    .menu-btn{display:block;}
+    .status{display:none;}
+  }
+  nav.mobile{display:none; flex-direction:column; border-top:1px solid var(--line); background:var(--bg-elev);}
+  nav.mobile.open{display:flex;}
+  nav.mobile a{padding:16px 32px; border-bottom:1px solid var(--line); font-size:14px; letter-spacing:0.06em;}
+  nav.mobile a .num{color:var(--olive-bright); margin-right:10px; font-family:var(--font-display);}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative; padding:88px 0 96px; overflow:hidden;}
+  .hero-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center; position:relative; z-index:2;}
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+
+  .eyebrow{display:flex; align-items:center; gap:10px; font-size:11.5px; letter-spacing:0.2em; color:var(--olive-bright); margin-bottom:22px; font-weight:600;}
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--olive-bright);}
+
+  h1.headline{
+    font-family:var(--font-display); font-weight:700; text-transform:uppercase;
+    font-size:clamp(2.6rem, 6vw, 4.6rem); line-height:0.98; letter-spacing:0.01em;
+    margin-bottom:26px;
+  }
+  h1.headline .accent{color:var(--olive-bright);}
+
+  .lede{font-size:16.5px; color:var(--ink-dim); max-width:46ch; margin-bottom:30px;}
+  .lede strong{color:var(--ink); font-weight:600;}
+
+  blockquote.vision{
+    position:relative; border-left:2px solid var(--olive); padding:4px 0 4px 22px;
+    font-size:15px; line-height:1.65; color:var(--ink); max-width:52ch; margin-bottom:36px;
+    font-style:italic;
+  }
+  blockquote.vision cite{display:block; margin-top:12px; font-style:normal; font-size:11.5px; letter-spacing:0.12em; color:var(--ink-faint);}
+
+  .cta-row{display:flex; align-items:center; gap:22px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:12px;
+    background:var(--olive); color:#111511; font-weight:600; font-size:13.5px;
+    letter-spacing:0.08em; padding:15px 26px; border-radius:var(--radius);
+    border:1px solid var(--olive); transition:background .15s ease, transform .15s ease;
+  }
+  .btn:hover{background:var(--olive-bright); transform:translateY(-1px);}
+  .btn svg{width:15px; height:15px;}
+  .meta-line{font-size:12px; color:var(--ink-faint); letter-spacing:0.04em;}
+
+  /* hero visual: cartographic device */
+  .hero-visual{position:relative; aspect-ratio:1/1; max-width:440px; margin:0 auto;}
+  .hero-visual svg{width:100%; height:100%;}
+
+  /* ---------- overview / cards ---------- */
+  .section-head{max-width:60ch; margin-bottom:44px;}
+  .section-head .kicker{font-size:11.5px; letter-spacing:0.18em; color:var(--olive-bright); font-weight:600; margin-bottom:12px;}
+  .section-head h2{font-family:var(--font-display); font-weight:600; text-transform:uppercase; font-size:clamp(1.6rem,3vw,2.1rem); letter-spacing:0.01em;}
+
+  .overview{padding:100px 0; border-top:1px solid var(--line); position:relative; z-index:2;}
+
+  .card-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:900px){ .card-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:600px){ .card-grid{grid-template-columns:1fr;} }
+
+  .card{
+    background:var(--bg-elev); padding:34px 28px; display:flex; flex-direction:column; gap:18px;
+    transition:background .15s ease; min-height:230px;
+  }
+  .card:hover{background:var(--bg-elev-2);}
+  .card-top{display:flex; align-items:flex-start; justify-content:space-between;}
+  .card-num{font-family:var(--font-display); font-size:13px; color:var(--ink-faint); letter-spacing:0.08em;}
+  .card-icon{width:30px; height:30px; color:var(--olive-bright);}
+  .card h3{font-family:var(--font-display); font-weight:600; text-transform:uppercase; font-size:1.15rem; letter-spacing:0.01em; margin-bottom:2px;}
+  .card p{font-size:13.5px; color:var(--ink-dim); flex:1;}
+  .card .open{font-size:11.5px; letter-spacing:0.12em; color:var(--olive-bright); font-weight:600; display:flex; align-items:center; gap:8px; margin-top:auto;}
+  .card .open svg{width:12px; height:12px; transition:transform .15s ease;}
+  .card:hover .open svg{transform:translateX(3px);}
+
+  /* ---------- placeholder sections ---------- */
+  .dossier-section{padding:110px 0; border-top:1px solid var(--line); position:relative; z-index:2;}
+  .status-badge{
+    display:inline-flex; align-items:center; gap:8px; font-size:11px; letter-spacing:0.14em;
+    color:var(--sand); border:1px solid rgba(201,184,147,0.35); background:rgba(201,184,147,0.06);
+    padding:7px 14px; border-radius:var(--radius); margin-top:18px;
+  }
+  .status-badge .dot{width:6px; height:6px; border-radius:50%; background:var(--sand);}
+
+  /* ---------- reusable: callout ---------- */
+  .callout{
+    border-left:2px solid var(--olive); padding:18px 24px; background:var(--bg-elev);
+    font-size:14.5px; color:var(--ink-dim); max-width:66ch; margin:36px 0 0;
+  }
+  .callout strong{color:var(--ink);}
+
+  /* ---------- tags ---------- */
+  .tag-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:18px;}
+  .tag{
+    display:inline-flex; align-items:center; font-size:11px; letter-spacing:0.06em; font-weight:600;
+    color:var(--olive-bright); border:1px solid rgba(138,154,95,0.4); background:rgba(138,154,95,0.08);
+    padding:6px 12px; border-radius:var(--radius);
+  }
+  button.tag-link{font-family:var(--font-body); cursor:pointer; transition:background .15s ease, border-color .15s ease;}
+  button.tag-link:hover{background:rgba(138,154,95,0.18); border-color:var(--olive-bright);}
+
+  /* ---------- timeline ---------- */
+  .timeline{margin-top:52px;}
+  .timeline-nav{display:flex; overflow-x:auto; gap:1px; border:1px solid var(--line); background:var(--line);}
+  .timeline-nav button{
+    flex:1 0 auto; min-width:130px; background:var(--bg-elev); border:none; color:var(--ink-dim);
+    font-family:var(--font-body); font-size:12.5px; letter-spacing:0.03em; padding:16px; text-align:left; cursor:pointer;
+    transition:background .15s ease, color .15s ease;
+  }
+  .timeline-nav button .yr{display:block; font-family:var(--font-display); font-size:10.5px; letter-spacing:0.1em; color:var(--olive-bright); margin-bottom:5px;}
+  .timeline-nav button:hover{background:var(--bg-elev-2); color:var(--ink);}
+  .timeline-nav button.active{background:var(--bg-elev-2); color:var(--ink); box-shadow:inset 0 -2px 0 var(--olive-bright);}
+  .timeline-panels{border:1px solid var(--line); border-top:none; background:var(--bg-elev); padding:40px;}
+  @media (max-width:640px){ .timeline-panels{padding:26px 22px;} }
+  .timeline-panel{display:none;}
+  .timeline-panel.active{display:block;}
+  .timeline-panel h4{font-family:var(--font-display); text-transform:uppercase; font-weight:600; font-size:1.2rem; margin-bottom:14px; letter-spacing:0.01em;}
+  .timeline-panel p{color:var(--ink-dim); font-size:14.5px; max-width:70ch;}
+  .stub-note{display:inline-flex; align-items:center; gap:8px; font-size:11px; letter-spacing:0.08em; color:var(--sand); margin-top:16px;}
+  .stub-note .dot{width:6px; height:6px; border-radius:50%; background:var(--sand); flex:none;}
+
+  /* ---------- accordion (theory cards) ---------- */
+  .theory-grid{display:grid; grid-template-columns:1fr; gap:1px; background:var(--line); border:1px solid var(--line); margin-top:52px;}
+  .theory-item{background:var(--bg-elev);}
+  .theory-head{
+    width:100%; display:flex; align-items:center; justify-content:space-between; gap:20px;
+    background:none; border:none; color:var(--ink); font-family:var(--font-body); text-align:left;
+    padding:24px 26px; cursor:pointer;
+  }
+  .theory-head:hover{background:var(--bg-elev-2);}
+  .theory-head-left{display:flex; align-items:center; gap:16px;}
+  .theory-head .t-icon{width:24px; height:24px; color:var(--olive-bright); flex:none;}
+  .theory-head h3{font-family:var(--font-display); text-transform:uppercase; font-weight:600; font-size:1.02rem; letter-spacing:0.01em;}
+  .theory-head .chev{width:13px; height:13px; color:var(--ink-faint); transition:transform .2s ease; flex:none;}
+  .theory-item.open .chev{transform:rotate(180deg);}
+  .theory-body{max-height:0; overflow:hidden; transition:max-height .3s ease;}
+  .theory-item.open .theory-body{max-height:1100px;}
+  .theory-body-inner{padding:0 26px 30px; display:grid; grid-template-columns:1fr 1fr; gap:22px;}
+  @media (max-width:720px){ .theory-body-inner{grid-template-columns:1fr;} }
+  .theory-body-inner h5{font-size:11px; letter-spacing:0.08em; color:var(--olive-bright); margin-bottom:8px; font-weight:600;}
+  .theory-body-inner p{font-size:13.5px; color:var(--ink-dim); margin-bottom:16px;}
+
+  .synthesis{margin-top:44px; border-left:2px solid var(--sand); padding:20px 24px; background:var(--bg-elev); max-width:74ch;}
+  .synthesis h4{font-family:var(--font-display); text-transform:uppercase; font-size:0.95rem; letter-spacing:0.05em; margin-bottom:10px; color:var(--sand);}
+  .synthesis p{font-size:14px; color:var(--ink-dim);}
+
+  /* ---------- context list ---------- */
+  .context-list{margin-top:48px; display:grid; gap:1px; background:var(--line); border:1px solid var(--line);}
+  .context-item{background:var(--bg-elev); padding:24px 26px; display:flex; gap:20px; align-items:flex-start;}
+  .context-item .c-num{font-family:var(--font-display); font-size:13px; color:var(--olive-bright); flex:none; padding-top:2px; min-width:22px;}
+  .context-item p{font-size:14px; color:var(--ink-dim);}
+  .context-item p strong{color:var(--ink);}
+
+  /* ---------- principle cards ---------- */
+  .principle-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); margin-top:52px;}
+  @media (max-width:840px){ .principle-grid{grid-template-columns:1fr;} }
+  .principle{background:var(--bg-elev); padding:30px;}
+  .principle h3{font-family:var(--font-display); text-transform:uppercase; font-weight:600; font-size:1.05rem; margin-bottom:14px;}
+  .principle p{font-size:13.5px; color:var(--ink-dim); margin-bottom:14px;}
+  .principle .example{
+    border-left:2px solid var(--olive); padding:12px 16px; font-size:13px; color:var(--ink);
+    background:rgba(138,154,95,0.06); margin:14px 0;
+  }
+  .principle .example .label{display:block; font-size:10px; letter-spacing:0.08em; color:var(--olive-bright); margin-bottom:6px; font-weight:600;}
+
+  .future-label{display:inline-flex; align-items:center; gap:8px; font-size:10.5px; letter-spacing:0.1em; color:var(--sand); margin:52px 0 16px;}
+  .future-label .dot{width:6px; height:6px; border-radius:50%; background:var(--sand);}
+  .future-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:840px){ .future-grid{grid-template-columns:1fr;} }
+  .future-item{background:var(--bg-elev); padding:22px 22px;}
+  .future-item h4{font-family:var(--font-display); text-transform:uppercase; font-size:0.9rem; margin-bottom:10px; letter-spacing:0.02em;}
+  .future-item p{font-size:12.5px; color:var(--ink-dim);}
+
+  /* ---------- besluitsimulator ---------- */
+  .scenario{border:1px solid var(--line); background:var(--bg-elev); padding:34px; margin-top:32px;}
+  .scenario:first-of-type{margin-top:52px;}
+  @media (max-width:640px){ .scenario{padding:24px 20px;} }
+  .scenario-head{display:flex; align-items:baseline; gap:12px; margin-bottom:14px;}
+  .scenario-num{font-family:var(--font-display); font-size:13px; color:var(--olive-bright); letter-spacing:0.08em;}
+  .scenario h3{font-family:var(--font-display); text-transform:uppercase; font-weight:600; font-size:1.1rem;}
+  .scenario-situation{font-size:14px; color:var(--ink-dim); max-width:65ch; margin-bottom:24px;}
+  .options{display:grid; gap:10px;}
+  .option-btn{
+    display:flex; gap:14px; align-items:flex-start; text-align:left; width:100%;
+    background:var(--bg); border:1px solid var(--line-strong); color:var(--ink);
+    padding:15px 18px; border-radius:var(--radius); font-family:var(--font-body); font-size:13.5px; cursor:pointer;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .option-btn:hover{border-color:var(--olive);}
+  .option-btn.selected{border-color:var(--olive-bright); background:rgba(138,154,95,0.08);}
+  .option-btn .letter{font-family:var(--font-display); font-weight:600; color:var(--olive-bright); flex:none;}
+  .reveal{display:none; margin-top:22px; border-top:1px solid var(--line); padding-top:22px;}
+  .reveal.show{display:block;}
+  .reveal-block{margin-bottom:16px;}
+  .reveal-block:last-child{margin-bottom:0;}
+  .reveal-block .rb-label{font-size:10.5px; letter-spacing:0.1em; color:var(--ink-faint); margin-bottom:8px; font-weight:600;}
+  .reveal-block.mine .rb-label{color:var(--sand);}
+  .reveal-block p{font-size:13.5px; color:var(--ink-dim);}
+  .reveal-block.mine{border-left:2px solid var(--sand); padding-left:16px;}
+
+  /* ---------- eindoordeel ---------- */
+  .recap-quote{
+    border-left:2px solid var(--olive); padding:6px 0 6px 24px; font-size:16.5px; line-height:1.6;
+    font-style:italic; max-width:62ch; margin:40px 0 40px;
+  }
+  .answer-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:720px){ .answer-grid{grid-template-columns:1fr;} }
+  .answer-item{background:var(--bg-elev); padding:24px 26px;}
+  .answer-item h4{font-family:var(--font-display); text-transform:uppercase; font-size:0.9rem; margin-bottom:10px;}
+  .answer-item p{font-size:13.5px; color:var(--ink-dim);}
+  .concept-flag{display:inline-flex; align-items:center; gap:7px; font-size:10px; letter-spacing:0.1em; color:var(--sand); margin-top:12px;}
+  .concept-flag .dot{width:5px; height:5px; border-radius:50%; background:var(--sand);}
+
+  .poll{margin-top:56px; border-top:1px solid var(--line); padding-top:44px;}
+  .poll h3{font-family:var(--font-display); text-transform:uppercase; font-weight:600; font-size:1.15rem; margin-bottom:20px;}
+  .poll-options{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:22px;}
+  .poll-btn{
+    background:var(--bg-elev); border:1px solid var(--line-strong); color:var(--ink);
+    padding:13px 22px; border-radius:var(--radius); font-family:var(--font-body); font-size:13px; cursor:pointer;
+    transition:border-color .15s ease;
+  }
+  .poll-btn:hover{border-color:var(--olive);}
+  .poll-btn.selected{border-color:var(--olive-bright); background:rgba(138,154,95,0.08);}
+  .poll-response{display:none; font-size:14px; color:var(--ink-dim); max-width:60ch; border-left:2px solid var(--olive); padding-left:18px;}
+  .poll-response.show{display:block;}
+
+  /* ---------- sources ---------- */
+  .sources{margin-top:60px; border-top:1px solid var(--line); padding-top:32px;}
+  .sources summary{cursor:pointer; font-size:12px; letter-spacing:0.08em; color:var(--olive-bright); font-weight:600; list-style:none; display:inline-flex; align-items:center; gap:8px;}
+  .sources summary::-webkit-details-marker{display:none;}
+  .src-chev{width:11px; height:11px; transition:transform .2s ease;}
+  .sources[open] .src-chev{transform:rotate(180deg);}
+  .sources ol{margin:22px 0 0 0; padding-left:20px; display:grid; gap:11px;}
+  .sources li{font-size:12.5px; color:var(--ink-dim); line-height:1.6;}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line); padding:44px 0; position:relative; z-index:2;}
+  .footer-row{display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; font-size:12px; color:var(--ink-faint); letter-spacing:0.04em;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<svg class="terrain" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+<path class="ring-A" d="M 450.6,190.0 C 451.8,194.2 451.9,199.0 450.6,203.1 C 449.2,207.3 446.2,211.5 442.6,215.0 C 438.9,218.5 433.8,221.5 428.9,224.0 C 424.0,226.4 418.2,228.2 413.2,229.9 C 408.1,231.5 403.0,232.6 398.4,233.8 C 393.8,235.0 389.7,236.0 385.6,237.1 C 381.6,238.2 377.9,239.3 374.1,240.2 C 370.3,241.2 366.6,242.1 362.8,242.7 C 359.0,243.3 355.2,243.7 351.4,243.9 C 347.6,244.1 343.8,243.9 340.0,243.9 C 336.2,243.9 332.6,243.7 328.6,243.8 C 324.7,243.9 320.8,244.1 316.4,244.6 C 311.9,245.0 307.1,245.9 301.7,246.4 C 296.3,246.9 290.2,247.7 284.2,247.6 C 278.1,247.6 271.2,247.3 265.3,246.0 C 259.4,244.7 253.2,242.6 248.6,239.8 C 244.1,236.9 240.2,233.0 237.9,229.0 C 235.7,225.0 234.9,220.1 235.1,215.6 C 235.2,211.1 237.1,206.3 238.9,202.0 C 240.7,197.8 243.7,193.7 246.0,190.0 C 248.4,186.3 251.0,183.0 253.2,179.7 C 255.3,176.4 257.0,173.3 258.8,170.2 C 260.5,167.1 261.8,163.9 263.7,160.9 C 265.6,157.8 267.5,154.6 270.1,151.9 C 272.6,149.1 275.7,146.5 279.1,144.3 C 282.5,142.2 286.6,140.4 290.6,139.0 C 294.6,137.5 298.9,136.6 303.1,135.7 C 307.2,134.7 311.3,134.0 315.4,133.2 C 319.4,132.3 323.3,131.4 327.4,130.4 C 331.5,129.4 335.6,128.2 340.0,127.3 C 344.4,126.5 349.0,125.4 353.7,125.2 C 358.3,124.9 363.3,124.9 367.9,125.6 C 372.4,126.4 377.0,127.8 381.0,129.7 C 385.0,131.5 388.5,134.1 391.8,136.5 C 395.0,139.0 397.7,142.0 400.5,144.6 C 403.4,147.2 405.9,149.9 409.1,152.4 C 412.2,154.9 415.6,157.1 419.3,159.7 C 423.0,162.3 427.5,164.7 431.4,167.7 C 435.4,170.7 440.0,174.0 443.2,177.7 C 446.3,181.5 449.4,185.8 450.6,190.0 Z"/>
+<path class="ring-A" d="M 567.3,190.0 C 569.9,198.7 570.1,208.4 567.3,217.0 C 564.6,225.6 558.3,234.2 550.8,241.4 C 543.4,248.5 532.7,254.7 522.7,259.8 C 512.6,264.9 500.8,268.6 490.4,272.0 C 480.0,275.3 469.5,277.6 460.1,280.1 C 450.7,282.6 442.1,284.6 433.8,286.8 C 425.5,289.0 417.9,291.3 410.1,293.2 C 402.3,295.1 394.7,297.1 386.9,298.3 C 379.1,299.6 371.2,300.4 363.4,300.8 C 355.6,301.2 347.8,300.9 340.0,300.8 C 332.2,300.8 324.8,300.3 316.7,300.5 C 308.6,300.8 300.6,301.3 291.4,302.2 C 282.2,303.1 272.3,304.8 261.3,305.9 C 250.2,306.9 237.7,308.6 225.2,308.5 C 212.8,308.4 198.6,307.8 186.5,305.1 C 174.3,302.5 161.6,298.2 152.2,292.3 C 142.9,286.5 134.9,278.5 130.2,270.2 C 125.6,261.9 124.0,251.8 124.3,242.6 C 124.6,233.3 128.4,223.5 132.1,214.7 C 135.9,205.9 142.0,197.6 146.9,190.0 C 151.8,182.4 157.1,175.6 161.5,168.8 C 165.9,162.0 169.4,155.8 173.0,149.3 C 176.6,142.9 179.3,136.4 183.2,130.1 C 187.1,123.8 190.9,117.3 196.2,111.7 C 201.5,106.0 207.8,100.5 214.8,96.1 C 221.8,91.7 230.2,88.1 238.4,85.1 C 246.6,82.2 255.6,80.3 264.1,78.3 C 272.6,76.3 281.1,75.0 289.4,73.2 C 297.7,71.4 305.7,69.5 314.1,67.5 C 322.6,65.5 331.0,63.0 340.0,61.2 C 349.0,59.4 358.6,57.3 368.1,56.7 C 377.7,56.1 388.0,56.2 397.3,57.7 C 406.7,59.3 416.1,62.2 424.3,66.0 C 432.5,69.7 439.8,75.0 446.4,80.1 C 453.1,85.2 458.5,91.3 464.4,96.7 C 470.3,102.1 475.5,107.5 481.9,112.7 C 488.4,117.8 495.3,122.5 503.0,127.7 C 510.6,133.0 519.8,138.0 527.9,144.2 C 536.1,150.4 545.5,157.2 552.0,164.8 C 558.6,172.4 564.8,181.3 567.3,190.0 Z"/>
+<path class="ring-A" d="M 684.1,190.0 C 687.9,203.2 688.2,217.9 684.0,230.9 C 679.9,243.8 670.4,257.0 659.1,267.8 C 647.8,278.6 631.7,287.9 616.5,295.7 C 601.2,303.4 583.4,308.9 567.6,314.0 C 551.8,319.2 536.1,322.6 521.8,326.3 C 507.5,330.1 494.6,333.2 482.0,336.6 C 469.4,339.9 458.0,343.3 446.1,346.2 C 434.3,349.1 422.8,352.0 411.0,353.9 C 399.2,355.8 387.2,357.0 375.4,357.7 C 363.6,358.3 351.8,357.8 340.0,357.7 C 328.2,357.7 316.9,357.0 304.7,357.3 C 292.4,357.7 280.4,358.5 266.4,359.8 C 252.5,361.2 237.5,363.8 220.8,365.4 C 204.2,367.0 185.2,369.5 166.3,369.3 C 147.4,369.1 126.0,368.4 107.6,364.3 C 89.2,360.2 70.0,353.7 55.8,344.9 C 41.6,336.0 29.5,323.9 22.5,311.3 C 15.5,298.8 13.1,283.5 13.6,269.6 C 14.0,255.6 19.7,240.6 25.4,227.4 C 31.1,214.1 40.3,201.6 47.7,190.0 C 55.1,178.4 63.2,168.2 69.8,157.9 C 76.4,147.6 81.8,138.2 87.3,128.4 C 92.8,118.6 96.8,108.8 102.7,99.3 C 108.6,89.8 114.4,80.0 122.4,71.4 C 130.3,62.8 139.9,54.6 150.5,47.9 C 161.2,41.2 173.8,35.8 186.2,31.3 C 198.7,26.8 212.3,23.9 225.1,20.9 C 238.0,17.9 250.8,15.9 263.4,13.2 C 276.0,10.5 288.1,7.7 300.9,4.6 C 313.6,1.6 326.4,-2.3 340.0,-5.0 C 353.6,-7.7 368.1,-10.8 382.6,-11.7 C 397.1,-12.6 412.6,-12.5 426.7,-10.2 C 440.9,-7.9 455.1,-3.4 467.5,2.3 C 479.9,7.9 491.0,15.9 501.1,23.7 C 511.2,31.4 519.4,40.5 528.3,48.8 C 537.3,57.0 545.1,65.1 554.8,72.9 C 564.6,80.8 575.1,87.8 586.7,95.7 C 598.3,103.7 612.1,111.3 624.5,120.7 C 636.8,130.0 651.0,140.3 660.9,151.9 C 670.9,163.4 680.2,176.8 684.1,190.0 Z"/>
+<path class="ring-A" d="M 800.8,190.0 C 806.0,207.6 806.3,227.4 800.8,244.7 C 795.2,262.1 782.4,279.7 767.4,294.1 C 752.3,308.6 730.7,321.2 710.3,331.5 C 689.9,341.8 666.0,349.3 644.9,356.1 C 623.7,363.0 602.6,367.6 583.5,372.6 C 564.3,377.6 547.0,381.9 530.2,386.3 C 513.3,390.7 498.0,395.4 482.2,399.3 C 466.3,403.1 450.9,407.0 435.1,409.5 C 419.3,412.1 403.3,413.7 387.4,414.5 C 371.6,415.4 355.8,414.7 340.0,414.6 C 324.2,414.6 309.1,413.6 292.7,414.1 C 276.3,414.5 260.2,415.6 241.5,417.4 C 222.8,419.2 202.8,422.8 180.4,424.9 C 158.1,427.0 132.6,430.4 107.3,430.2 C 82.1,429.9 53.5,428.9 28.8,423.4 C 4.1,417.9 -21.6,409.2 -40.6,397.4 C -59.6,385.6 -75.8,369.3 -85.2,352.5 C -94.6,335.7 -97.9,315.3 -97.2,296.5 C -96.6,277.8 -89.0,257.8 -81.3,240.0 C -73.7,222.3 -61.4,205.5 -51.5,190.0 C -41.6,174.5 -30.7,160.8 -21.8,147.0 C -13.0,133.3 -5.8,120.6 1.5,107.5 C 8.9,94.4 14.4,81.3 22.2,68.5 C 30.0,55.8 37.9,42.7 48.5,31.2 C 59.2,19.7 72.0,8.6 86.2,-0.3 C 100.5,-9.3 117.4,-16.6 134.1,-22.6 C 150.7,-28.6 168.9,-32.4 186.2,-36.4 C 203.4,-40.5 220.5,-43.1 237.4,-46.8 C 254.3,-50.4 270.5,-54.2 287.6,-58.3 C 304.7,-62.3 321.8,-67.5 340.0,-71.1 C 358.2,-74.8 377.7,-79.0 397.1,-80.2 C 416.4,-81.3 437.2,-81.3 456.2,-78.1 C 475.1,-75.0 494.2,-69.0 510.8,-61.4 C 527.4,-53.9 542.2,-43.1 555.8,-32.7 C 569.3,-22.4 580.2,-10.2 592.2,0.8 C 604.2,11.8 614.7,22.7 627.7,33.2 C 640.8,43.7 654.8,53.1 670.4,63.8 C 685.9,74.4 704.4,84.6 721.0,97.2 C 737.5,109.7 756.5,123.5 769.8,138.9 C 783.1,154.4 795.6,172.4 800.8,190.0 Z"/>
+<path class="ring-A" d="M 917.5,190.0 C 924.0,212.1 924.5,236.8 917.5,258.6 C 910.5,280.4 894.5,302.4 875.6,320.5 C 856.7,338.7 829.7,354.4 804.1,367.3 C 778.5,380.3 748.6,389.6 722.1,398.2 C 695.6,406.8 669.1,412.5 645.1,418.8 C 621.2,425.1 599.5,430.5 578.3,436.0 C 557.2,441.6 538.0,447.4 518.2,452.3 C 498.3,457.1 479.0,462.0 459.2,465.2 C 439.4,468.4 419.3,470.4 399.4,471.4 C 379.6,472.5 359.8,471.6 340.0,471.5 C 320.2,471.4 301.3,470.2 280.7,470.8 C 260.1,471.4 240.0,472.8 216.5,475.0 C 193.1,477.3 168.0,481.7 140.0,484.4 C 112.0,487.1 80.1,491.3 48.4,491.0 C 16.7,490.7 -19.1,489.4 -50.1,482.5 C -81.0,475.7 -113.2,464.8 -137.1,449.9 C -160.9,435.1 -181.1,414.7 -192.9,393.7 C -204.8,372.6 -208.8,347.0 -208.0,323.5 C -207.2,300.0 -197.6,275.0 -188.1,252.7 C -178.5,230.5 -163.1,209.4 -150.7,190.0 C -138.2,170.6 -124.5,153.4 -113.5,136.1 C -102.4,118.9 -93.4,103.0 -84.2,86.6 C -75.0,70.2 -68.1,53.7 -58.3,37.8 C -48.5,21.8 -38.7,5.3 -25.3,-9.0 C -11.9,-23.4 4.1,-37.3 21.9,-48.5 C 39.8,-59.8 61.0,-68.9 81.9,-76.4 C 102.8,-84.0 125.6,-88.8 147.2,-93.8 C 168.8,-98.9 190.3,-102.2 211.4,-106.7 C 232.6,-111.3 252.9,-116.1 274.3,-121.1 C 295.7,-126.2 317.1,-132.7 340.0,-137.3 C 362.9,-141.9 387.2,-147.1 411.5,-148.6 C 435.8,-150.1 461.8,-150.0 485.6,-146.1 C 509.4,-142.2 533.3,-134.6 554.1,-125.1 C 574.9,-115.6 593.4,-102.2 610.4,-89.2 C 627.4,-76.2 641.1,-60.9 656.1,-47.1 C 671.1,-33.3 684.3,-19.6 700.6,-6.5 C 716.9,6.6 734.6,18.4 754.1,31.8 C 773.5,45.1 796.7,57.9 817.5,73.6 C 838.3,89.3 862.0,106.6 878.7,126.0 C 895.4,145.4 911.1,167.9 917.5,190.0 Z"/>
+<path class="ring-B" d="M 1450.3,760.0 C 1453.9,766.2 1456.8,773.2 1457.5,779.9 C 1458.3,786.6 1457.4,793.8 1454.7,800.1 C 1452.1,806.5 1447.4,812.8 1441.8,818.0 C 1436.1,823.2 1428.6,827.8 1421.0,831.4 C 1413.3,835.0 1404.4,837.5 1396.1,839.6 C 1387.8,841.7 1379.1,842.7 1371.1,843.7 C 1363.1,844.8 1355.5,845.1 1348.3,845.8 C 1341.1,846.5 1334.6,847.0 1328.1,847.9 C 1321.6,848.7 1315.5,849.8 1309.2,850.9 C 1302.8,852.0 1296.6,853.4 1290.0,854.4 C 1283.4,855.4 1276.5,856.5 1269.5,856.8 C 1262.6,857.2 1255.2,857.2 1248.2,856.4 C 1241.2,855.6 1234.0,854.1 1227.5,852.0 C 1221.0,849.8 1214.7,846.8 1209.1,843.5 C 1203.5,840.2 1198.5,836.1 1194.1,832.0 C 1189.6,827.8 1185.8,823.3 1182.2,818.7 C 1178.6,814.2 1175.6,809.6 1172.5,804.9 C 1169.4,800.3 1166.5,795.6 1163.7,790.8 C 1160.9,786.0 1158.0,781.1 1155.5,776.0 C 1153.0,770.8 1150.4,765.5 1148.5,760.0 C 1146.7,754.5 1145.1,748.6 1144.5,742.7 C 1143.9,736.8 1143.9,730.6 1145.1,724.7 C 1146.3,718.8 1148.4,712.7 1151.5,707.1 C 1154.6,701.5 1158.8,696.0 1163.6,691.1 C 1168.5,686.3 1174.3,681.8 1180.5,677.9 C 1186.6,674.0 1193.6,670.6 1200.5,667.7 C 1207.5,664.8 1215.0,662.4 1222.4,660.5 C 1229.8,658.6 1237.5,657.1 1245.0,656.2 C 1252.6,655.2 1260.3,654.7 1267.8,654.8 C 1275.3,654.9 1282.8,655.4 1290.0,656.5 C 1297.2,657.7 1304.3,659.4 1310.8,661.5 C 1317.3,663.6 1323.6,666.4 1329.3,669.4 C 1334.9,672.3 1340.1,675.8 1344.9,679.2 C 1349.7,682.6 1353.9,686.2 1358.2,689.6 C 1362.4,693.1 1366.2,696.4 1370.5,699.6 C 1374.7,702.9 1378.9,705.8 1383.8,708.9 C 1388.6,712.0 1393.9,714.8 1399.5,718.2 C 1405.1,721.5 1411.5,724.8 1417.5,728.9 C 1423.5,733.0 1430.2,737.5 1435.7,742.7 C 1441.1,747.9 1446.7,753.8 1450.3,760.0 Z"/>
+<path class="ring-B" d="M 1576.3,760.0 C 1582.8,771.1 1587.8,783.6 1589.1,795.5 C 1590.5,807.5 1588.9,820.3 1584.2,831.7 C 1579.5,843.0 1571.1,854.3 1561.0,863.6 C 1551.0,872.9 1537.4,881.0 1523.8,887.4 C 1510.3,893.9 1494.3,898.5 1479.5,902.1 C 1464.7,905.8 1449.1,907.7 1434.9,909.5 C 1420.6,911.4 1406.9,912.0 1394.1,913.3 C 1381.3,914.5 1369.6,915.4 1358.0,916.9 C 1346.3,918.4 1335.6,920.3 1324.3,922.3 C 1312.9,924.2 1301.8,926.8 1290.0,928.6 C 1278.2,930.3 1265.9,932.3 1253.5,932.9 C 1241.0,933.5 1227.9,933.7 1215.4,932.2 C 1202.9,930.8 1190.0,928.1 1178.4,924.3 C 1166.8,920.4 1155.5,915.1 1145.5,909.1 C 1135.6,903.2 1126.7,895.9 1118.7,888.5 C 1110.7,881.1 1103.9,872.9 1097.5,864.9 C 1091.1,856.9 1085.6,848.5 1080.1,840.2 C 1074.6,831.9 1069.5,823.6 1064.5,815.0 C 1059.4,806.3 1054.3,797.7 1049.8,788.5 C 1045.3,779.4 1040.7,769.9 1037.4,760.0 C 1034.1,750.1 1031.2,739.6 1030.2,729.1 C 1029.1,718.6 1029.2,707.6 1031.3,697.0 C 1033.4,686.3 1037.2,675.5 1042.7,665.5 C 1048.2,655.5 1055.7,645.7 1064.4,637.1 C 1073.0,628.4 1083.5,620.3 1094.5,613.3 C 1105.4,606.4 1117.8,600.3 1130.3,595.1 C 1142.7,589.9 1156.0,585.7 1169.3,582.3 C 1182.5,578.8 1196.2,576.3 1209.7,574.6 C 1223.2,572.9 1236.9,572.0 1250.3,572.1 C 1263.7,572.2 1277.2,573.2 1290.0,575.2 C 1302.8,577.2 1315.5,580.3 1327.1,584.1 C 1338.8,587.9 1350.0,592.9 1360.1,598.2 C 1370.3,603.4 1379.4,609.6 1388.0,615.7 C 1396.6,621.7 1404.1,628.3 1411.7,634.4 C 1419.3,640.5 1426.1,646.5 1433.7,652.2 C 1441.3,658.0 1448.8,663.2 1457.5,668.7 C 1466.1,674.3 1475.5,679.3 1485.5,685.3 C 1495.6,691.2 1506.9,697.2 1517.7,704.5 C 1528.5,711.8 1540.4,719.9 1550.1,729.1 C 1559.9,738.3 1569.7,748.9 1576.3,760.0 Z"/>
+<path class="ring-B" d="M 1702.2,760.0 C 1711.6,775.9 1718.9,794.0 1720.8,811.2 C 1722.7,828.4 1720.4,846.9 1713.6,863.2 C 1706.9,879.6 1694.8,895.8 1680.3,909.1 C 1665.8,922.5 1646.3,934.2 1626.7,943.5 C 1607.2,952.7 1584.3,959.4 1562.9,964.7 C 1541.5,970.0 1519.1,972.7 1498.6,975.3 C 1478.1,978.0 1458.4,978.9 1439.9,980.7 C 1421.5,982.5 1404.7,983.8 1387.9,986.0 C 1371.1,988.1 1355.7,990.9 1339.4,993.7 C 1323.0,996.5 1307.0,1000.2 1290.0,1002.7 C 1273.0,1005.3 1255.3,1008.2 1237.4,1009.0 C 1219.5,1009.9 1200.6,1010.1 1182.6,1008.0 C 1164.6,1005.9 1146.1,1002.1 1129.3,996.6 C 1112.5,991.0 1096.3,983.3 1082.0,974.7 C 1067.7,966.1 1054.8,955.6 1043.3,945.0 C 1031.8,934.4 1022.0,922.6 1012.8,911.1 C 1003.5,899.5 995.7,887.5 987.8,875.5 C 979.9,863.5 972.5,851.5 965.3,839.1 C 958.0,826.7 950.6,814.3 944.1,801.1 C 937.6,787.9 931.0,774.3 926.3,760.0 C 921.6,745.7 917.3,730.7 915.8,715.6 C 914.4,700.4 914.4,684.5 917.4,669.2 C 920.4,653.9 925.9,638.3 933.9,623.9 C 941.8,609.5 952.7,595.5 965.1,583.0 C 977.5,570.4 992.6,558.9 1008.4,548.8 C 1024.2,538.7 1042.0,530.0 1060.0,522.5 C 1077.9,515.1 1097.1,509.0 1116.1,504.1 C 1135.2,499.1 1154.9,495.4 1174.3,493.0 C 1193.8,490.6 1213.6,489.3 1232.9,489.5 C 1252.1,489.6 1271.6,491.1 1290.0,493.9 C 1308.4,496.8 1326.7,501.2 1343.5,506.7 C 1360.3,512.2 1376.3,519.4 1391.0,526.9 C 1405.6,534.5 1418.8,543.5 1431.2,552.2 C 1443.6,560.9 1454.3,570.3 1465.3,579.1 C 1476.2,587.9 1485.9,596.6 1496.9,604.8 C 1507.9,613.1 1518.7,620.7 1531.2,628.6 C 1543.6,636.5 1557.1,643.8 1571.6,652.4 C 1586.0,661.0 1602.4,669.6 1617.9,680.1 C 1633.4,690.6 1650.5,702.2 1664.6,715.5 C 1678.6,728.8 1692.8,744.1 1702.2,760.0 Z"/>
+<path class="ring-B" d="M 1828.2,760.0 C 1840.4,780.8 1849.9,804.3 1852.4,826.8 C 1854.9,849.3 1851.9,873.5 1843.0,894.8 C 1834.2,916.1 1818.4,937.2 1799.5,954.7 C 1780.6,972.2 1755.2,987.5 1729.6,999.6 C 1704.1,1011.6 1674.2,1020.3 1646.3,1027.2 C 1618.4,1034.1 1589.1,1037.6 1562.3,1041.1 C 1535.6,1044.6 1509.8,1045.8 1485.7,1048.1 C 1461.7,1050.4 1439.7,1052.2 1417.8,1055.0 C 1395.9,1057.8 1375.7,1061.5 1354.4,1065.1 C 1333.1,1068.7 1312.2,1073.5 1290.0,1076.9 C 1267.8,1080.2 1244.7,1084.0 1221.3,1085.1 C 1198.0,1086.3 1173.3,1086.5 1149.7,1083.7 C 1126.2,1081.0 1102.1,1076.1 1080.2,1068.8 C 1058.3,1061.6 1037.1,1051.5 1018.4,1040.3 C 999.7,1029.1 983.0,1015.4 967.9,1001.6 C 952.8,987.7 940.2,972.3 928.1,957.2 C 916.0,942.1 905.8,926.4 895.4,910.8 C 885.1,895.1 875.5,879.5 866.0,863.3 C 856.5,847.1 846.9,830.9 838.5,813.6 C 830.0,796.4 821.3,778.6 815.1,760.0 C 809.0,741.4 803.4,721.7 801.5,702.0 C 799.6,682.2 799.7,661.4 803.6,641.5 C 807.5,621.5 814.7,601.1 825.1,582.3 C 835.4,563.6 849.6,545.2 865.8,528.9 C 882.0,512.5 901.7,497.4 922.4,484.3 C 943.0,471.1 966.2,459.7 989.7,450.0 C 1013.1,440.2 1038.1,432.3 1063.0,425.9 C 1087.9,419.4 1113.6,414.6 1139.0,411.4 C 1164.4,408.3 1190.2,406.6 1215.4,406.8 C 1240.6,407.0 1265.9,408.9 1290.0,412.6 C 1314.1,416.4 1337.9,422.2 1359.8,429.3 C 1381.8,436.5 1402.7,445.8 1421.8,455.7 C 1440.9,465.6 1458.2,477.3 1474.3,488.7 C 1490.5,500.0 1504.5,512.3 1518.8,523.8 C 1533.1,535.3 1545.8,546.6 1560.1,557.4 C 1574.5,568.2 1588.6,578.1 1604.8,588.4 C 1621.1,598.8 1638.8,608.3 1657.6,619.5 C 1676.5,630.7 1697.8,642.0 1718.1,655.7 C 1738.3,669.4 1760.7,684.5 1779.0,701.9 C 1797.4,719.3 1815.9,739.2 1828.2,760.0 Z"/>
+<path class="ring-B" d="M 1954.1,760.0 C 1969.2,785.7 1981.0,814.7 1984.0,842.4 C 1987.1,870.2 1983.4,900.0 1972.5,926.3 C 1961.6,952.6 1942.1,978.7 1918.8,1000.3 C 1895.5,1021.8 1864.0,1040.7 1832.5,1055.6 C 1801.0,1070.5 1764.1,1081.2 1729.7,1089.8 C 1695.3,1098.3 1659.1,1102.6 1626.1,1106.9 C 1593.0,1111.2 1561.3,1112.7 1531.6,1115.6 C 1501.8,1118.4 1474.7,1120.6 1447.7,1124.1 C 1420.7,1127.6 1395.8,1132.0 1369.5,1136.5 C 1343.2,1141.0 1317.4,1146.9 1290.0,1151.0 C 1262.6,1155.2 1234.1,1159.8 1205.3,1161.2 C 1176.4,1162.6 1145.9,1162.9 1116.9,1159.5 C 1087.9,1156.2 1058.1,1150.0 1031.1,1141.1 C 1004.1,1132.2 978.0,1119.8 954.9,1105.9 C 931.8,1092.1 911.1,1075.2 892.5,1058.1 C 873.9,1041.0 858.3,1022.0 843.4,1003.4 C 828.5,984.7 815.9,965.4 803.1,946.1 C 790.3,926.8 778.5,907.5 766.8,887.5 C 755.1,867.5 743.2,847.4 732.8,826.2 C 722.3,804.9 711.6,783.0 704.0,760.0 C 696.4,737.0 689.6,712.8 687.2,688.4 C 684.8,664.0 684.9,638.3 689.8,613.7 C 694.6,589.1 703.4,563.9 716.2,540.7 C 729.0,517.6 746.5,494.9 766.5,474.8 C 786.5,454.6 810.9,436.0 836.3,419.8 C 861.8,403.5 890.5,389.4 919.4,377.4 C 948.3,365.4 979.2,355.6 1009.9,347.7 C 1040.6,339.7 1072.3,333.8 1103.6,329.9 C 1135.0,325.9 1166.9,323.9 1198.0,324.1 C 1229.0,324.4 1260.3,326.7 1290.0,331.4 C 1319.7,336.0 1349.1,343.1 1376.2,351.9 C 1403.3,360.8 1429.1,372.3 1452.7,384.5 C 1476.2,396.7 1497.5,411.2 1517.5,425.2 C 1537.4,439.2 1554.7,454.4 1572.4,468.5 C 1590.0,482.6 1605.7,496.7 1623.4,510.0 C 1641.1,523.3 1658.5,535.5 1678.5,548.3 C 1698.6,561.1 1720.4,572.8 1743.7,586.6 C 1767.0,600.5 1793.3,614.3 1818.3,631.3 C 1843.2,648.2 1870.8,666.9 1893.5,688.3 C 1916.1,709.8 1939.0,734.3 1954.1,760.0 Z"/>
+<path class="ring-B" d="M 2080.1,760.0 C 2098.0,790.6 2112.0,825.1 2115.6,858.1 C 2119.3,891.1 2114.8,926.6 2101.9,957.9 C 2089.0,989.2 2065.8,1020.2 2038.0,1045.9 C 2010.3,1071.5 1972.9,1094.0 1935.4,1111.7 C 1897.9,1129.4 1854.0,1142.1 1813.1,1152.3 C 1772.1,1162.5 1729.1,1167.6 1689.8,1172.7 C 1650.5,1177.8 1612.7,1179.6 1577.4,1183.0 C 1542.0,1186.4 1509.8,1189.0 1477.6,1193.1 C 1445.5,1197.3 1415.9,1202.6 1384.6,1207.9 C 1353.3,1213.3 1322.6,1220.3 1290.0,1225.2 C 1257.4,1230.1 1223.5,1235.6 1189.2,1237.3 C 1154.9,1239.0 1118.6,1239.3 1084.1,1235.3 C 1049.6,1231.3 1014.1,1224.0 982.0,1213.4 C 949.8,1202.8 918.8,1188.0 891.3,1171.6 C 863.8,1155.1 839.2,1135.0 817.1,1114.7 C 795.0,1094.3 776.4,1071.7 758.7,1049.5 C 740.9,1027.3 725.9,1004.3 710.7,981.4 C 695.6,958.4 681.5,935.4 667.6,911.7 C 653.6,887.9 639.5,864.0 627.1,838.7 C 614.6,813.5 601.9,787.3 592.8,760.0 C 583.8,732.7 575.7,703.8 572.9,674.8 C 570.0,645.8 570.2,615.3 575.9,586.0 C 581.7,556.7 592.2,526.7 607.4,499.2 C 622.6,471.6 643.4,444.6 667.3,420.7 C 691.1,396.7 720.0,374.5 750.3,355.2 C 780.6,335.9 814.7,319.2 849.1,304.9 C 883.5,290.6 920.2,278.9 956.7,269.5 C 993.3,260.0 1031.0,252.9 1068.3,248.3 C 1105.6,243.6 1143.5,241.2 1180.5,241.5 C 1217.4,241.8 1254.7,244.5 1290.0,250.1 C 1325.3,255.6 1360.3,264.0 1392.5,274.6 C 1424.8,285.1 1455.5,298.8 1483.5,313.3 C 1511.5,327.8 1536.9,345.0 1560.6,361.7 C 1584.3,378.3 1604.9,396.4 1625.9,413.2 C 1646.9,430.0 1665.6,446.7 1686.6,462.6 C 1707.6,478.4 1728.4,492.9 1752.2,508.1 C 1776.1,523.3 1802.0,537.3 1829.7,553.8 C 1857.4,570.2 1888.7,586.7 1918.4,606.9 C 1948.1,627.0 1981.0,649.2 2007.9,674.7 C 2034.8,700.2 2062.1,729.4 2080.1,760.0 Z"/>
+<path class="ring-C" d="M 199.1,880.0 C 199.4,883.0 199.0,886.3 197.5,889.2 C 196.1,892.1 193.5,894.9 190.7,897.2 C 187.8,899.5 183.8,901.4 180.2,903.0 C 176.6,904.6 172.5,905.6 169.2,906.8 C 165.9,908.0 162.9,908.9 160.3,910.2 C 157.8,911.6 155.9,913.1 153.9,915.0 C 151.9,917.0 150.5,919.4 148.5,921.9 C 146.4,924.3 144.3,927.4 141.6,929.8 C 138.8,932.2 135.5,934.7 131.9,936.3 C 128.3,937.9 124.0,939.1 120.0,939.4 C 116.0,939.8 111.6,939.3 107.7,938.4 C 103.7,937.6 99.9,935.9 96.5,934.2 C 93.0,932.6 90.0,930.5 87.0,928.6 C 84.0,926.7 81.2,924.8 78.5,922.9 C 75.7,920.9 73.0,919.1 70.6,917.1 C 68.1,915.1 65.5,913.0 63.6,910.7 C 61.6,908.5 59.8,906.0 58.7,903.4 C 57.6,900.8 57.1,898.0 56.9,895.4 C 56.8,892.7 57.3,890.0 57.7,887.4 C 58.1,884.8 58.9,882.4 59.1,880.0 C 59.4,877.6 59.5,875.3 59.3,872.8 C 59.0,870.2 58.1,867.7 57.5,864.8 C 56.9,861.9 55.7,858.6 55.5,855.3 C 55.2,852.1 55.0,848.3 56.0,845.1 C 56.9,841.9 58.7,838.5 61.3,836.0 C 63.9,833.5 67.7,831.3 71.6,830.1 C 75.6,828.8 80.5,828.4 84.9,828.3 C 89.3,828.3 94.1,829.2 98.3,829.9 C 102.5,830.6 106.4,831.9 110.0,832.6 C 113.6,833.4 116.7,834.1 120.0,834.4 C 123.3,834.8 126.3,834.7 129.6,834.7 C 132.9,834.7 136.3,834.3 139.8,834.4 C 143.3,834.4 147.0,834.5 150.5,835.1 C 154.0,835.7 157.6,836.6 160.8,837.9 C 163.9,839.2 166.9,841.0 169.5,842.8 C 172.2,844.7 174.5,846.9 176.8,849.0 C 179.2,851.2 181.3,853.4 183.5,855.7 C 185.7,858.1 188.0,860.4 190.1,862.9 C 192.2,865.5 194.5,868.1 196.0,871.0 C 197.5,873.8 198.9,877.0 199.1,880.0 Z"/>
+<path class="ring-C" d="M 289.6,880.0 C 290.1,886.5 289.2,893.6 286.2,899.7 C 283.1,905.9 277.6,912.0 271.4,916.9 C 265.2,921.8 256.6,925.9 249.0,929.3 C 241.3,932.7 232.6,934.9 225.5,937.5 C 218.4,940.1 211.8,941.9 206.4,944.8 C 200.9,947.7 196.9,950.9 192.7,955.0 C 188.5,959.2 185.4,964.5 181.0,969.8 C 176.6,975.0 172.1,981.5 166.2,986.6 C 160.3,991.8 153.2,997.2 145.5,1000.7 C 137.8,1004.1 128.7,1006.6 120.0,1007.4 C 111.3,1008.1 102.0,1007.0 93.6,1005.2 C 85.2,1003.3 77.0,999.7 69.6,996.2 C 62.2,992.7 55.6,988.3 49.2,984.2 C 42.8,980.2 36.9,976.0 31.0,971.8 C 25.2,967.7 19.4,963.8 14.0,959.5 C 8.7,955.1 3.3,950.8 -0.9,945.9 C -5.1,941.0 -8.9,935.7 -11.3,930.2 C -13.6,924.7 -14.8,918.6 -15.1,912.9 C -15.5,907.2 -14.3,901.3 -13.5,895.9 C -12.7,890.4 -11.0,885.2 -10.4,880.0 C -9.9,874.8 -9.6,870.0 -10.1,864.5 C -10.7,859.1 -12.5,853.6 -13.9,847.4 C -15.3,841.1 -17.8,834.2 -18.3,827.1 C -18.9,820.1 -19.3,812.1 -17.2,805.2 C -15.1,798.3 -11.4,791.0 -5.8,785.7 C -0.2,780.3 7.9,775.7 16.4,773.0 C 24.8,770.3 35.3,769.4 44.8,769.3 C 54.3,769.2 64.5,771.1 73.5,772.6 C 82.5,774.2 90.8,776.8 98.6,778.4 C 106.3,780.1 113.0,781.6 120.0,782.4 C 127.0,783.1 133.4,783.0 140.5,783.0 C 147.6,782.9 154.9,782.1 162.3,782.3 C 169.8,782.4 177.9,782.5 185.4,783.7 C 192.9,785.0 200.6,787.0 207.4,789.8 C 214.2,792.6 220.4,796.4 226.2,800.4 C 231.9,804.3 236.8,809.0 241.8,813.6 C 246.8,818.2 251.3,823.1 256.0,828.0 C 260.8,833.0 265.7,838.0 270.2,843.4 C 274.6,848.8 279.6,854.6 282.8,860.7 C 286.0,866.8 289.0,873.5 289.6,880.0 Z"/>
+<path class="ring-C" d="M 380.0,880.0 C 380.9,890.0 379.4,900.8 374.8,910.3 C 370.1,919.7 361.7,929.0 352.2,936.6 C 342.7,944.1 329.5,950.3 317.8,955.6 C 306.1,960.8 292.6,964.2 281.8,968.1 C 270.9,972.1 260.8,974.8 252.4,979.3 C 244.1,983.8 237.9,988.7 231.5,995.1 C 225.0,1001.4 220.3,1009.6 213.5,1017.6 C 206.7,1025.7 199.9,1035.6 190.8,1043.5 C 181.8,1051.4 170.9,1059.7 159.1,1065.0 C 147.3,1070.3 133.3,1074.1 120.0,1075.3 C 106.7,1076.4 92.3,1074.8 79.5,1072.0 C 66.6,1069.1 54.1,1063.6 42.8,1058.2 C 31.4,1052.9 21.3,1046.0 11.4,1039.8 C 1.6,1033.6 -7.4,1027.1 -16.4,1020.8 C -25.4,1014.5 -34.3,1008.5 -42.5,1001.8 C -50.6,995.2 -58.9,988.5 -65.4,981.0 C -71.9,973.5 -77.7,965.3 -81.3,956.9 C -84.9,948.5 -86.6,939.3 -87.2,930.5 C -87.8,921.7 -85.9,912.7 -84.7,904.3 C -83.5,895.9 -80.8,888.0 -80.0,880.0 C -79.1,872.0 -78.7,864.6 -79.6,856.3 C -80.4,848.0 -83.2,839.5 -85.3,830.0 C -87.4,820.4 -91.2,809.7 -92.1,799.0 C -92.9,788.2 -93.6,776.0 -90.4,765.4 C -87.2,754.8 -81.4,743.6 -72.8,735.4 C -64.3,727.1 -51.8,720.1 -38.9,715.9 C -26.0,711.8 -9.9,710.3 4.7,710.2 C 19.3,710.1 34.9,713.0 48.7,715.4 C 62.4,717.7 75.2,721.8 87.1,724.3 C 99.0,726.8 109.3,729.1 120.0,730.3 C 130.7,731.4 140.6,731.2 151.4,731.2 C 162.2,731.2 173.5,729.9 184.9,730.1 C 196.4,730.3 208.8,730.5 220.3,732.4 C 231.8,734.3 243.5,737.5 254.0,741.7 C 264.4,746.0 274.0,751.8 282.8,757.9 C 291.6,764.0 299.1,771.2 306.7,778.2 C 314.4,785.3 321.3,792.7 328.6,800.3 C 335.8,807.9 343.4,815.5 350.3,823.9 C 357.1,832.2 364.7,841.0 369.6,850.3 C 374.6,859.7 379.2,870.0 380.0,880.0 Z"/>
+</svg>
+
+<header>
+  <div class="wrap nav-row">
+    <a href="#top" class="brand">
+      <svg class="brand-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" stroke="#8a9a5f" stroke-width="1.3"/>
+        <path d="M20 6 L23 18 L20 34 L17 18 Z" fill="#b7c98a"/>
+        <path d="M6 20 L18 17 L34 20 L18 23 Z" fill="#8a9a5f" opacity="0.55"/>
+        <circle cx="20" cy="20" r="2" fill="#ece9e1"/>
+      </svg>
+      <span class="brand-text">
+        <span class="name">LEIDERSCHAPSDOSSIER</span>
+        <span class="sub">PORTFOLIO OPDRACHT 6</span>
+      </span>
+    </a>
+
+    <nav class="primary" aria-label="Hoofdnavigatie">
+      <a href="#personeelsprofiel"><span class="num">01</span>Personeelsprofiel</a>
+      <a href="#leiderschapsintelligentie"><span class="num">02</span>Intelligentie</a>
+      <a href="#operationele-context"><span class="num">03</span>Context</a>
+      <a href="#commandofilosofie"><span class="num">04</span>Filosofie</a>
+      <a href="#besluitsimulator"><span class="num">05</span>Simulator</a>
+      <a href="#eindoordeel"><span class="num">06</span>Oordeel</a>
+    </nav>
+
+    <div class="status">
+      <span class="dot"></span> STATUS: ACTIEF
+    </div>
+
+    <button class="menu-btn" id="menuBtn" aria-label="Menu openen" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+  <nav class="mobile" id="mobileNav" aria-label="Mobiele navigatie">
+    <a href="#personeelsprofiel"><span class="num">01</span>Personeelsprofiel</a>
+    <a href="#leiderschapsintelligentie"><span class="num">02</span>Leiderschapsintelligentie</a>
+    <a href="#operationele-context"><span class="num">03</span>Operationele context</a>
+    <a href="#commandofilosofie"><span class="num">04</span>Commandofilosofie</a>
+    <a href="#besluitsimulator"><span class="num">05</span>Besluitsimulator</a>
+    <a href="#eindoordeel"><span class="num">06</span>Eindoordeel</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">INTERACTIEF LEIDERSCHAPSDOSSIER</div>
+        <h1 class="headline">Eerst dienen.<br>Dan <span class="accent">leiden.</span></h1>
+        <p class="lede">Dit dossier laat zien hoe <strong>theorie, ervaring en persoonlijke waarden</strong> samenkomen in de manier waarop ik leiding wil geven, van de KMA tot mijn eerste functie als officier.</p>
+
+        <blockquote class="vision">
+          "Ik wil een leider zijn die eerst dient en dan pas leidt: die vertrouwen geeft en verdient door zelf kwetsbaar te durven zijn, eigenaarschap toont in plaats van fouten af te schuiven, en zijn stijl aanpast aan wie voor hem staat."
+          <cite>TLNT H. NOBEL · COMMANDOFILOSOFIE</cite>
+        </blockquote>
+
+        <div class="cta-row">
+          <a class="btn" href="#personeelsprofiel">
+            Start het dossier
+            <svg viewBox="0 0 20 20" fill="none"><path d="M4 10h12M12 5l5 5-5 5" stroke="#111511" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <span class="meta-line">6 secties · ca. 8 tot 10 minuten</span>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 400 400" fill="none">
+          <!-- bezel rings -->
+          <circle cx="200" cy="200" r="188" stroke="rgba(138,154,95,0.45)" stroke-width="1.2"/>
+          <circle cx="200" cy="200" r="182" stroke="rgba(138,154,95,0.2)" stroke-width="1"/>
+          <circle cx="200" cy="200" r="128" stroke="rgba(138,154,95,0.28)" stroke-width="1"/>
+          <circle cx="200" cy="200" r="70" stroke="rgba(138,154,95,0.2)" stroke-width="1"/>
+
+          <!-- minor ticks -->
+          <g stroke="rgba(232,230,222,0.28)" stroke-width="1">
+            <line x1="200" y1="12" x2="200" y2="24"/>
+            <line x1="291" y1="42.4" x2="285" y2="52.8"/>
+            <line x1="357.7" y1="109" x2="347.2" y2="115"/>
+            <line x1="388" y1="200" x2="376" y2="200"/>
+            <line x1="357.7" y1="291" x2="347.2" y2="285"/>
+            <line x1="291" y1="357.6" x2="285" y2="347.2"/>
+            <line x1="200" y1="388" x2="200" y2="376"/>
+            <line x1="109" y1="357.6" x2="115" y2="347.2"/>
+            <line x1="42.3" y1="291" x2="52.8" y2="285"/>
+            <line x1="12" y1="200" x2="24" y2="200"/>
+            <line x1="42.3" y1="109" x2="52.8" y2="115"/>
+            <line x1="109" y1="42.4" x2="115" y2="52.8"/>
+          </g>
+          <!-- cardinal ticks -->
+          <g stroke="rgba(183,201,138,0.7)" stroke-width="1.4">
+            <line x1="200" y1="12" x2="200" y2="34"/>
+            <line x1="388" y1="200" x2="366" y2="200"/>
+            <line x1="200" y1="388" x2="200" y2="366"/>
+            <line x1="12" y1="200" x2="34" y2="200"/>
+          </g>
+          <g font-family="Inter, sans-serif" font-size="9" letter-spacing="1" fill="rgba(232,230,222,0.4)" text-anchor="middle">
+            <text x="200" y="52">000&#176;</text>
+            <text x="345" y="203">090&#176;</text>
+            <text x="200" y="352">180&#176;</text>
+            <text x="55" y="203">270&#176;</text>
+          </g>
+
+          <!-- secondary diagonal blades -->
+          <g>
+            <path d="M200,200 L281.3,118.7 L212,184 Z" fill="#8a9a5f"/>
+            <path d="M200,200 L281.3,118.7 L216,188 Z" fill="#6a7849"/>
+            <path d="M200,200 L281.3,281.3 L216,212 Z" fill="#7c8c53"/>
+            <path d="M200,200 L281.3,281.3 L212,216 Z" fill="#5f6d40"/>
+            <path d="M200,200 L118.7,281.3 L188,216 Z" fill="#6a7849"/>
+            <path d="M200,200 L118.7,281.3 L184,212 Z" fill="#59653e"/>
+            <path d="M200,200 L118.7,118.7 L184,188 Z" fill="#7c8c53"/>
+            <path d="M200,200 L118.7,118.7 L188,184 Z" fill="#6a7849"/>
+          </g>
+          <!-- primary blades N/O/Z/W -->
+          <g>
+            <path d="M200,200 L200,60 L182,178 Z" fill="#b7c98a"/>
+            <path d="M200,200 L200,60 L218,178 Z" fill="#8a9a5f"/>
+            <path d="M200,200 L340,200 L222,182 Z" fill="#a3b579"/>
+            <path d="M200,200 L340,200 L222,218 Z" fill="#7c8c53"/>
+            <path d="M200,200 L200,340 L182,222 Z" fill="#8a9a5f"/>
+            <path d="M200,200 L200,340 L218,222 Z" fill="#6f7f4c"/>
+            <path d="M200,200 L60,200 L178,182 Z" fill="#7c8c53"/>
+            <path d="M200,200 L60,200 L178,218 Z" fill="#5f6d40"/>
+          </g>
+
+          <circle cx="200" cy="200" r="14" fill="#14181a" stroke="rgba(232,230,222,0.5)" stroke-width="1"/>
+          <circle cx="200" cy="200" r="3.5" fill="#ece9e1"/>
+
+          <g font-family="Oswald, sans-serif" font-weight="600" font-size="15" letter-spacing="1" fill="#ece9e1" text-anchor="middle">
+            <text x="200" y="30">N</text>
+            <text x="378" y="205">O</text>
+            <text x="200" y="374">Z</text>
+            <text x="22" y="205">W</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW / CARD GRID -->
+  <section class="overview">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">VERKEN HET DOSSIER</div>
+        <h2>Zes secties, één visie</h2>
+      </div>
+
+      <div class="card-grid">
+
+        <a class="card" href="#personeelsprofiel">
+          <div class="card-top">
+            <span class="card-num">01</span>
+            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></svg>
+          </div>
+          <h3>Personeelsprofiel</h3>
+          <p>Wie ben ik en welke ervaringen hebben mij gevormd?</p>
+          <span class="open">Openen <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+        </a>
+
+        <a class="card" href="#leiderschapsintelligentie">
+          <div class="card-top">
+            <span class="card-num">02</span>
+            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 5c-2-1.6-4.6-2-7-1.3V17c2.4-.7 5-.3 7 1.3 2-1.6 4.6-2 7-1.3V3.7C16.6 3 14 3.4 12 5Z"/><path d="M12 5v13.3"/></svg>
+          </div>
+          <h3>Leiderschapsintelligentie</h3>
+          <p>Welke kennis en theorie vormen de basis van mijn visie?</p>
+          <span class="open">Openen <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+        </a>
+
+        <a class="card" href="#operationele-context">
+          <div class="card-top">
+            <span class="card-num">03</span>
+            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.2"/><path d="M12 3.5V6M12 18v2.5M3.5 12H6M18 12h2.5"/></svg>
+          </div>
+          <h3>Operationele context</h3>
+          <p>Binnen welke professionele en militaire omgeving moet ik leidinggeven?</p>
+          <span class="open">Openen <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+        </a>
+
+        <a class="card" href="#commandofilosofie">
+          <div class="card-top">
+            <span class="card-num">04</span>
+            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="8.5"/><path d="M15.5 8.5 13 13l-4.5 2.5L11 11l4.5-2.5Z"/></svg>
+          </div>
+          <h3>Commandofilosofie</h3>
+          <p>Wat is mijn eigen leiderschapsvisie en waar sta ik voor?</p>
+          <span class="open">Openen <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+        </a>
+
+        <a class="card" href="#besluitsimulator">
+          <div class="card-top">
+            <span class="card-num">05</span>
+            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 4v6M12 10 6 20M12 10l6 10"/><circle cx="12" cy="4" r="1.6" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <h3>Besluitsimulator</h3>
+          <p>Hoe vertaal ik mijn visie naar concrete keuzes?</p>
+          <span class="open">Openen <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+        </a>
+
+        <a class="card" href="#eindoordeel">
+          <div class="card-top">
+            <span class="card-num">06</span>
+            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3.5 14.6 9l6 .9-4.3 4.2 1 6-5.3-2.8-5.3 2.8 1-6L3.4 9.9l6-.9Z"/></svg>
+          </div>
+          <h3>Eindoordeel</h3>
+          <p>Wat is de kern van mijn visie? En zou jij mij als leider volgen?</p>
+          <span class="open">Openen <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PLACEHOLDER SECTIONS -->
+  <section id="personeelsprofiel" class="dossier-section">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">01 · PERSONEELSPROFIEL</div>
+        <h2>Wie is deze leider?</h2>
+        <p class="lede" style="margin-top:16px;">Zweden, het bestuursjaar in Groningen en POTOM: de ervaringen die mijn kijk op leiderschap hebben gevormd.</p>
+      </div>
+
+      <div class="callout">
+        Centraal in dit dossier staat één vraag: <strong>"Wat voor leider wil ik zijn?"</strong> Die vraag werd onder meer scherp doordat ik me tijdens de VTO zelfverzekerd voelde bij het leiden van een brancardrace, maar juist zoekende was bij het leiden van een projectgroep zonder fysiek element. In beide situaties wilde ik hetzelfde bereiken, mijn groep meekrijgen naar een doel, maar dat lukte niet in beide gevallen even goed.
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-nav">
+          <button class="active" data-target="tl-zweden"><span class="yr">6 TOT 14 JAAR</span>Zweden</button>
+          <button data-target="tl-bestuur"><span class="yr">GRONINGEN</span>Bestuursjaar</button>
+          <button data-target="tl-potom"><span class="yr">NA STUDIE</span>POTOM</button>
+          <button data-target="tl-consultant"><span class="yr">DAARNA</span>Consultant</button>
+          <button data-target="tl-kma"><span class="yr">VOOROPLEIDING</span>KMA</button>
+          <button data-target="tl-nu"><span class="yr">NU</span>VTO Gnk</button>
+        </div>
+        <div class="timeline-panels">
+
+          <div class="timeline-panel active" id="tl-zweden">
+            <h4>Zweden: een eiland zonder auto's</h4>
+            <p>Van mijn zesde tot veertiende woonde ik met mijn gezin op een eiland in Zweden, zonder auto's, alles ging per boot. Dat vroeg om veel coördinatie en gaf mij op jonge leeftijd al veel zelfstandigheid. We gingen zelfstandig met de boot heen en weer en met de bus naar school. Op de internationale basisschool groeide ik op tussen veel verschillende culturen, wat me leerde verschillen te waarderen. Op de tweetalige middelbare school was ik de enige international. Ik leerde erbij te horen door eerst te observeren en dan de interactie op te zoeken, iets wat nog steeds in mij naar boven komt. In mijn opvoeding gaven mijn ouders me veel vrijheid om zelf keuzes te maken, met duidelijke gevolgen als dat misging. Dat vertrouwen vormt de basis van hoe ik nu naar leiderschap kijk: vertrouwen geven, belonen als het goed gaat, en consequenties verbinden als dat niet zo is. Dit sluit aan bij dienend leiderschap en bij actief volgerschap uit de Visie Leiderschap Defensie.</p>
+            <div class="tag-row"><button class="tag tag-link" data-theory="dienend">Dienend leiderschap</button><button class="tag tag-link" data-theory="vld">Visie Leiderschap Defensie</button></div>
+          </div>
+
+          <div class="timeline-panel" id="tl-bestuur">
+            <h4>Bestuursjaar in Groningen</h4>
+            <p>In mijn derde studiejaar zat ik in het bestuur van mijn studievereniging. Ik was verantwoordelijk voor twee commissies en de samenwerking met externe partijen. Om studie en bestuur te combineren, leerde ik het belang van delegeren: ik gaf commissies kaders mee in plaats van de uitvoering te bepalen. Wanneer ik te veel controle nam, ontstond weerstand. Tegelijk moest ik als bestuurslid soms vrienden aanspreken, bijvoorbeeld op binnen roken tijdens een borrel, terwijl ik nog steeds onderdeel van de groep wilde blijven. Die zoektocht naar de balans tussen formeel en informeel zie ik nu terug op de werkvloer bij Defensie. Dit sluit aan bij opdrachtgerichte commandovoering en bij situationeel leiderschap.</p>
+            <div class="tag-row"><button class="tag tag-link" data-theory="dienend">Opdrachtgerichte commandovoering</button><button class="tag tag-link" data-theory="situationeel">Situationeel leiderschap</button></div>
+          </div>
+
+          <div class="timeline-panel" id="tl-potom">
+            <h4>POTOM: leidinggeven onder druk</h4>
+            <p>Na mijn studie zocht ik een fysieke uitdaging en begon aan de praktische opleiding tot officier der Mariniers. Ik leerde leidinggeven onder hoge stress en fysieke belasting, en dat rust en overzicht bewaren soms belangrijker is dan doorzetten. Ik ontdekte dat mijn voorkeursstijl coachend en participatief is: mijn kracht zit in het één-op-één aanspreken en adviseren, minder in voor de groep staan. Doordat ik vaak werd geconfronteerd met mijn sterke en zwakke punten, leerde ik ook hoe belangrijk het is je eigen valkuilen te kennen. Ik werd bijvoorbeeld onder druk minder nauwkeurig, en vroeg daarom zelf aan mijn buddy om mij extra te controleren tijdens kaart- en kompasoefeningen. Dit sluit aan bij authentiek leiderschap en bij situationeel leiderschap.</p>
+            <div class="tag-row"><button class="tag tag-link" data-theory="authentiek">Authentiek leiderschap</button><button class="tag tag-link" data-theory="situationeel">Situationeel leiderschap</button></div>
+          </div>
+
+          <div class="timeline-panel" id="tl-consultant">
+            <h4>Consultant</h4>
+            <p>Tijdens mijn werk als consultant leerde ik meer over wie ik ben als persoon en hoe ik mijn gedrag kan inzetten om een bepaald effect op anderen te bereiken. We werkten hier met het DISC-kleurenmodel, waaruit naar voren kwam dat mijn voorkeursgedrag richting geel neigt. Wat ik hieruit heb meegenomen, is dat je je gedrag bewust kunt aanpassen om een bepaald effect te bereiken: bij een blauwe manager geef ik bijvoorbeeld alvast meer feiten en gegevens mee en ben ik analytisch, bij een rode manager geef ik direct en concreet antwoord op de vraag, en bij een gele manager begin ik eerst over het weekend. Voor mijn leiderschapsvisie betekent dit dat ik, door te weten wat de behoeften van de ander zijn, mijn gedrag daarop kan aanpassen om makkelijker het gewenste effect te bereiken. Dit sluit aan bij situationeel leiderschap en het leiderschapscircumplex: ook daar draait het om het aanpassen van je gedrag aan wie voor je staat.</p>
+            <div class="tag-row"><button class="tag tag-link" data-theory="situationeel">Situationeel leiderschap</button><button class="tag tag-link" data-theory="circumplex">Leiderschapscircumplex</button></div>
+          </div>
+
+          <div class="timeline-panel" id="tl-kma">
+            <h4>KMA: vooropleiding</h4>
+            <p>Op de KMA leerde ik veel nieuwe handvatten om gestructureerd leiding te geven, en kreeg ik meer inzicht in hoe ik onder druk reageer. Wat ik hierin leerde, is dat ik controle ga vastpakken zodra ik zelf het overzicht dreig kwijt te raken als leider. Door me hiervan bewust te zijn, kan ik mijn gedrag tijdig bijsturen voordat ik te controlerend word. Ook leerde ik het belang van directief leidinggeven, en van delegeren in de vorm van opdrachtgerichte commandovoering. Directief leidinggeven herken ik als een stijl binnen het leiderschapscircumplex, en opdrachtgerichte commandovoering sluit aan bij dienend leiderschap.</p>
+            <div class="tag-row"><button class="tag tag-link" data-theory="circumplex">Leiderschapscircumplex</button><button class="tag tag-link" data-theory="dienend">Opdrachtgerichte commandovoering</button></div>
+          </div>
+
+          <div class="timeline-panel" id="tl-nu">
+            <h4>Nu: VTO Geneeskundige Dienst</h4>
+            <p>Nu rond ik de vaktechnische opleiding (VTO) tot officier van de Geneeskundige Dienst af. De vraag waarmee dit dossier opent, wat voor leider ik wil zijn, komt hier samen met alles wat volgt: theorie, de eisen van de werkomgeving, mijn eigen principes en de keuzes die daaruit voortkomen.</p>
+            <p>Tijdens de VTO bouwde ik verder op de inzichten die ik op de KMA had ontwikkeld. Wat hier meer naar voren kwam, is het besef dat niet iedereen je aardig hoeft te vinden: soms is de opdracht belangrijker, en moet je dat achteraf goedmaken. Hierin moet ik nog leren om wat meer vuur te laten zien en, als de situatie daarom vraagt, meer noodzaak te creëren. Ook kwam gevechtsleiding sterker naar voren tijdens de VTO. Dit heeft mij meer vertrouwen gegeven dat een goed plan de basis vormt, maar dat je door ervaring ook van het plan moet kunnen afwijken als de situatie verandert. Dan is het als leider belangrijk om knopen door te hakken, en is een participatieve leiderschapsstijl niet altijd passend.</p>
+            <div class="tag-row"><button class="tag tag-link" data-theory="circumplex">Leiderschapscircumplex</button><button class="tag tag-link" data-theory="situationeel">Situationeel leiderschap</button></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="leiderschapsintelligentie" class="dossier-section">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">02 · LEIDERSCHAPSINTELLIGENTIE</div>
+        <h2>Welke theorie draagt mijn visie?</h2>
+        <p class="lede" style="margin-top:16px;">Leiderschap is <em>"dat wat er in een bepaalde context tussen mensen gebeurt, op het moment dat er een gaat leiden en een ander gaat volgen om tot een gezamenlijk doel te komen"</em> (Visie Leiderschap Defensie, 2023): de definitie die in dit dossier steeds terugkomt.</p>
+      </div>
+
+      <div class="theory-grid">
+
+        <div class="theory-item open" data-theory="authentiek">
+          <button class="theory-head">
+            <div class="theory-head-left">
+              <svg class="t-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>
+              <h3>Authentiek leiderschap</h3>
+            </div>
+            <svg class="chev" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </button>
+          <div class="theory-body">
+            <div class="theory-body-inner">
+              <div>
+                <h5>KERN</h5>
+                <p>Vier componenten vormen de basis: zelfbewustzijn, gebalanceerde informatieverwerking, relationele transparantie en een geïnternaliseerd moreel kompas (Avolio &amp; Gardner, 2005; Walumbwa et al., 2008). Bill George vult dit aan met het idee van je "True North": het innerlijk kompas gevormd door je levensverhaal (George &amp; Sims, 2007).</p>
+                <h5>STERK IN DEFENSIE</h5>
+                <p>Een authentieke leider weet hoe hij onder stress reageert en welke invloed zijn gedrag op zijn mensen heeft. Moreel kompas en transparantie bouwen het vertrouwen op dat nodig is wanneer snel gehandeld moet worden.</p>
+              </div>
+              <div>
+                <h5>BEPERKING</h5>
+                <p>Het model houdt geen rekening met situaties waarin je, binnen de wet maar tegen je eigen moreel kompas in, moet handelen vanwege een direct bevel. Ook kan de hiërarchie binnen Defensie relationele transparantie hinderen.</p>
+                <h5>WAT IK MEENEEM</h5>
+                <p>Om te kunnen groeien als leider moet je jezelf goed kennen, iets wat mede gevormd is tijdens de reflectiemomenten in mijn vooropleidingen.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="theory-item" data-theory="dienend">
+          <button class="theory-head">
+            <div class="theory-head-left">
+              <svg class="t-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 5c-2-1.6-4.6-2-7-1.3V17c2.4-.7 5-.3 7 1.3 2-1.6 4.6-2 7-1.3V3.7C16.6 3 14 3.4 12 5Z"/><path d="M12 5v13.3"/></svg>
+              <h3>Dienend leiderschap</h3>
+            </div>
+            <svg class="chev" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </button>
+          <div class="theory-body">
+            <div class="theory-body-inner">
+              <div>
+                <h5>KERN</h5>
+                <p>Een dienend leider kiest er bewust voor eerst te dienen en pas daarna te leiden (Greenleaf, 1977). Een recentere definitie combineert de motivatie om te leiden met de neiging om te dienen, met nadruk op het empoweren en ontwikkelen van medewerkers (Van Dierendonck, 2011).</p>
+                <h5>STERK IN DEFENSIE</h5>
+                <p>Het heeft veel raakvlakken met opdrachtgerichte commandovoering: de leider geeft ruimte aan ondercommandanten om zelf de "hoe" in te vullen, op basis van het oogmerk.</p>
+              </div>
+              <div>
+                <h5>BEPERKING</h5>
+                <p>Er zijn situaties waarin een leider niet op de achtergrond kan blijven, bijvoorbeeld wanneer hij als enige een helikopterview heeft waarop gehandeld moet worden. Dan kan dienend leiderschap te passief zijn.</p>
+                <h5>WAT IK MEENEEM</h5>
+                <p>Ik wil successen zoveel mogelijk doorschuiven naar mijn team, en pas naar voren treden als het echt nodig is.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="theory-item" data-theory="situationeel">
+          <button class="theory-head">
+            <div class="theory-head-left">
+              <svg class="t-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg>
+              <h3>Situationeel leiderschap</h3>
+            </div>
+            <svg class="chev" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </button>
+          <div class="theory-body">
+            <div class="theory-body-inner">
+              <div>
+                <h5>KERN</h5>
+                <p>Er bestaat geen enkele "beste" stijl: je past je stijl aan op de "readiness" van de medewerker voor de taak. Gedrag wordt verdeeld over twee assen, sturing en ondersteuning, met vier stijlen: leiden, begeleiden, steunen, delegeren.</p>
+                <h5>STERK IN DEFENSIE</h5>
+                <p>Als officier werk je op een dynamische werkvloer waar elke situatie om een andere aanpak vraagt: leidend bij medewerkers net uit de opleiding, delegerend bij ervaren onderofficieren.</p>
+              </div>
+              <div>
+                <h5>BEPERKING</h5>
+                <p>Het is empirisch moeilijk te meten wanneer welke stijl het beste past, en "readiness" is lastig objectief vast te stellen.</p>
+                <h5>WAT IK MEENEEM</h5>
+                <p>Mijn voorkeur ligt niet vast: ik moet kunnen schakelen, zoals bij de brancardrace (meer sturing) tegenover de projectgroep (meer ondersteuning).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="theory-item" data-theory="vld">
+          <button class="theory-head">
+            <div class="theory-head-left">
+              <svg class="t-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.2"/></svg>
+              <h3>Visie Leiderschap Defensie</h3>
+            </div>
+            <svg class="chev" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </button>
+          <div class="theory-body">
+            <div class="theory-body-inner">
+              <div>
+                <h5>KERN</h5>
+                <p>Leiderschap ontstaat in de interactie tussen leider en volger, niet gebonden aan rang. Volgen is een werkwoord: een actieve rol met kritisch meedenken, feedback geven en de juiste informatie aanleveren (VLD, 2023, p.9).</p>
+                <h5>WAAROM DEFENSIE DIT BENADRUKT</h5>
+                <p>De wereld is onvoorspelbaarder geworden en Defensie groeit. Dat vraagt een schaalbare definitie die op elk niveau werkt, zodat leiderschap overal in de organisatie kan ontstaan.</p>
+              </div>
+              <div>
+                <h5>WAT HET VRAAGT</h5>
+                <p>Wie de beste informatiepositie heeft, mag de leiding pakken, ook een manschap ten opzichte van een officier (VLD, 2023). Dat vraagt moed van de volger, en van de officier het vermogen om te kunnen schakelen naar volgen en dat ongemak te accepteren, terwijl hij verantwoordelijk blijft.</p>
+                <h5>WAT IK MEENEEM</h5>
+                <p>Rollen liggen niet vast aan rang. Ik moet kunnen schakelen tussen leiden en volgen, afhankelijk van wie op dat moment de beste informatie heeft.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="theory-item" data-theory="circumplex">
+          <button class="theory-head">
+            <div class="theory-head-left">
+              <svg class="t-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17M3.5 12h17" stroke-opacity="0.5"/></svg>
+              <h3>Leiderschapscircumplex</h3>
+            </div>
+            <svg class="chev" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </button>
+          <div class="theory-body">
+            <div class="theory-body-inner">
+              <div>
+                <h5>KERN</h5>
+                <p>Het circumplex helpt gedrag af te stemmen op de ander, de taak en de context (IK 2-1250). Twee assen, conflictueus vs. mensgericht en passief vs. resultaatgericht, leveren acht stijlen op in drie kleuren: groen (meest positief), oranje (kortdurend bruikbaar) en rood (negatief op lange termijn).</p>
+                <h5>STERK IN DEFENSIE</h5>
+                <p>Het laat zien dat gedrag gedrag oproept: samengedrag roept samengedrag op, tegengedrag roept tegengedrag op, en bovengedrag van een machtiger persoon roept ondergedrag op bij de ander.</p>
+              </div>
+              <div>
+                <h5>LET OP</h5>
+                <p>Je bent niet een stijl: het is het gedrag dat je op dat moment toont. Bij tijdsdruk kan een directieve (oranje) stijl nodig zijn, maar zodra het kan moet je terugschakelen naar een groene stijl en uitleggen waarom.</p>
+                <h5>WAT IK MEENEEM</h5>
+                <p>Participatief is mijn voorkeursstijl: ik gebruik dit bewust en verwacht er betrokkenheid voor terug. Ik merk ook dat wantrouwen of autoritair gedrag van anderen hetzelfde bij mij oproept, en wil daar alert op blijven.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="synthesis">
+        <h4>Samenvatting</h4>
+        <p>De theorieën delen, ondanks hun verschillen, dezelfde kern: authentiek leiderschap benadrukt zelfkennis en een moreel kompas, dienend leiderschap zet de missie en je mensen boven jezelf, situationeel leiderschap en het circumplex draaien om het aanpassen van je gedrag aan context en anderen, en de Visie Leiderschap Defensie laat het belang zien van de interactie tussen leiden en volgen. Steeds komt hetzelfde terug: weten wie je bent, je kunnen aanpassen aan wie voor je staat, en jezelf niet centraal stellen.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="operationele-context" class="dossier-section">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">03 · OPERATIONELE CONTEXT</div>
+        <h2>Wat vraagt de omgeving van mij als leider?</h2>
+        <p class="lede" style="margin-top:16px;">Voordat ik inga op mijn eigen principes, eerst de omgeving waarbinnen ik moet leidinggeven, en wat die omgeving van een leider vraagt.</p>
+      </div>
+
+      <div class="context-list">
+        <div class="context-item">
+          <span class="c-num">01</span>
+          <p><strong>Toenemende onvoorspelbaarheid.</strong> De wereld om Defensie heen is onveiliger en onvoorspelbaarder geworden: meer data, meer variabelen, een groeiende organisatie. Dat vraagt een schaalbare leiderschapsdefinitie die op elk niveau werkt, niet belegd bij één functie of rang (VLD, 2023).</p>
+        </div>
+        <div class="context-item">
+          <span class="c-num">02</span>
+          <p><strong>Leiden en volgen zijn niet aan rang gebonden.</strong> Wie de beste informatiepositie heeft, kan de leiding pakken, ook een manschap ten opzichte van een officier (VLD, 2023). Dat vraagt moed van de volger, en van de officier het vermogen om te kunnen schakelen naar volgen en dat ongemak te accepteren, terwijl hij verantwoordelijk blijft.</p>
+        </div>
+        <div class="context-item">
+          <span class="c-num">03</span>
+          <p><strong>Een dynamische werkvloer vraagt stijlflexibiliteit.</strong> Elke situatie vraagt een andere aanpak: meer sturing bij medewerkers die net van de opleiding komen, meer ruimte bij ervaren onderofficieren, zoals situationeel leiderschap beschrijft.</p>
+        </div>
+        <div class="context-item">
+          <span class="c-num">04</span>
+          <p><strong>De blik is op de officier gericht.</strong> In situaties waarin iemand de knoop moet doorhakken, wordt vaak naar de officier gekeken. Beslissingen en gedrag van de leider hebben direct effect op het gedrag van de mensen aan wie hij leidinggeeft.</p>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:40px;">
+        Deze eisen van de omgeving zijn de reden dat ik in het volgende onderdeel, <strong>Commandofilosofie</strong>, inga op mijn eigen principes en concrete keuzes: mijn antwoord op wat deze context van mij vraagt.
+      </div>
+    </div>
+  </section>
+
+  <section id="commandofilosofie" class="dossier-section">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">04 · COMMANDOFILOSOFIE</div>
+        <h2>Waar sta ik voor?</h2>
+        <p class="lede" style="margin-top:16px;">Vertrouwen, eigenaarschap en personeel op 1, met concrete voorbeelden uit mijn ervaring.</p>
+      </div>
+
+      <div class="principle-grid">
+
+        <div class="principle">
+          <h3>Eigenaarschap</h3>
+          <p>Eigenaarschap tonen als leider betekent toegeven wanneer je een fout hebt gemaakt of iets niet weet, en jezelf kwetsbaar durven opstellen. Klaassens (2025) vat dit treffend samen met de titel van zijn boek: je bent wat je doet, niet wat je zegt. Dat laat zien dat het een samenwerking is waarin je elkaars sterktes gebruikt, en het zorgt voor vertrouwen en draagvlak: je bent beter te vertrouwen omdat je eerlijk bent. Dit sluit aan bij dienend leiderschap, jezelf kwetsbaar opstellen, en bij authentiek leiderschap, weten wat je sterktes en zwaktes zijn. Andersom wil ik ook eigenaarschap creëren bij de mensen die ik leid: door zelf het goede voorbeeld te geven, hoop ik dat dit gedrag zich spiegelt in mijn volgers, wat aansluit bij actief volgerschap uit de Visie Leiderschap Defensie (VLD, 2023). Een veilige omgeving met een gezamenlijk doel, waarin je elkaar op basis van vertrouwen kunt aanspreken, helpt daarbij.</p>
+          <div class="example">
+            <span class="label">VOORBEELD: VRA'S</span>
+            Toen ik PC was op de KMA was ik verantwoordelijk voor het correct invullen van de VRA's door medestudenten. Toen dit niet goed was gegaan, zei mijn leidinggevende dat dit aan de studenten lag. Ik gaf zelf aan dat het ook aan mij lag, omdat ik het onvoldoende had gecontroleerd. Mijn leidinggevende zag dat ik het hiermee opnam voor mijn groep, de groep zelf heeft dit niet gemerkt, dus ik deed het niet voor eigen gewin. Ook bij de bevelsuitgiften, tijdens BPV 2, aan de MTF stelde ik mezelf kwetsbaar op door toe te geven wanneer ik het antwoord op een vraag niet wist.
+          </div>
+          <div class="tag-row"><button class="tag tag-link" data-theory="dienend">Dienend leiderschap</button><button class="tag tag-link" data-theory="authentiek">Authentiek leiderschap</button><button class="tag tag-link" data-theory="vld">VLD</button></div>
+        </div>
+
+        <div class="principle">
+          <h3>Positioneren</h3>
+          <p>Positioneren gaat over hoe ik mij opstel als officier naar mensen lager, gelijk en hoger in rang. Defensie kent een duidelijke hiërarchische structuur, maar ik wil niet dat rang bepaalt hoe ik mensen behandel: het geeft vooral een indicatie van wat je van elkaar kan verwachten. Positioneren is voor mij steeds een balans zoeken tussen formeel en informeel: ik wil leiden vanuit de groep in plaats van afstand te nemen, ook al maakt dat het soms lastiger om mensen aan te spreken. Ik moet daarin nog leren dat je soms streng moet zijn en niet iedereen tevreden kan houden, en dat je mensen ook kunt aanspreken op basis van het doel of de opdracht, wat binnen Defensie het belangrijkst is. Dit sluit aan bij de kernboodschap van <em>The Mission, the Men, and Me</em> (Blaber, 2008): eerst de opdracht, dan je mensen, en pas als laatste jezelf. Ook situationeel leiderschap en het leiderschapscircumplex spelen hier een rol: mijn gedrag bepaalt mede welk gedrag ik bij anderen oproep.</p>
+          <div class="example">
+            <span class="label">VOORBEELD: VERVEN</span>
+            Tijdens een verfklus op mijn BPV 2 was ik als enige officier op de werkvloer verantwoordelijk. Ik wilde het gezellig houden met de manschappen omdat ik nieuw was, maar had ook een deadline te halen, dus moest ik hen op momenten aanspreken op treuzelen, terwijl ik het gevoel had nog geen draagvlak te hebben verdiend. Door zelf actief mee te verven in plaats van alleen te sturen, kreeg ik meer tempo terug: mijn gedrag riep vergelijkbaar gedrag op bij de groep.
+          </div>
+          <div class="tag-row"><button class="tag tag-link" data-theory="situationeel">Situationeel leiderschap</button><button class="tag tag-link" data-theory="circumplex">Leiderschapscircumplex</button></div>
+        </div>
+
+        <div class="principle">
+          <h3>Buikpijn als leider</h3>
+          <p>Als leider kun je buikpijn hebben van het spanningsveld tussen iemand vertrouwen en ruimte geven, en tegelijk de controle en verantwoordelijkheid dragen. Want als het misgaat, staan niet alleen je eigen carrière maar vooral de levens en het welzijn van je mensen op het spel. Dit spanningsveld sluit aan bij een beperking van dienend leiderschap: soms moet je juist wél naar voren treden. Ook opdrachtgerichte commandovoering, kaders geven in het "wat" in plaats van het "hoe", speelt hier een rol.</p>
+          <div class="example">
+            <span class="label">VOORBEELD: AMO PELETONSAANVAL</span>
+            Tijdens de eindoefening van de AMO op de KMA mocht ik een pelotonsaanval plannen en leiden. Omdat ik zo graag wilde dat het goed ging, schoot ik door in controle en werd ik te sturend richting mijn groepscommandanten: ik vertelde hen hoe ze iets moesten doen, in plaats van alleen de kaders te schetsen. Nu zou ik meer vertrouwen en ruimte geven, en pas ingrijpen wanneer dat nodig is.
+          </div>
+          <div class="tag-row"><button class="tag tag-link" data-theory="dienend">Dienend leiderschap</button><button class="tag tag-link" data-theory="dienend">Opdrachtgerichte commandovoering</button></div>
+        </div>
+
+        <div class="principle">
+          <h3>Personeel op 1</h3>
+          <p>Mijn leidinggevende tijdens de VTO, Joost, straalt uit dat hij hard voor zijn mensen werkt en hen op nummer 1 zet. Dat geeft mij het gevoel dat ik hetzelfde terug moet doen, en het is wat ik ook naar mijn eigen mensen wil uitstralen: wat er ook gebeurt, ik doe alles voor hen en mijn uiterste best, niet voor eigen gewin. Dit is de kern van dienend leiderschap: een stapje extra zetten voor anderen, zodat zij dat uiteindelijk ook voor jou doen.</p>
+          <div class="example">
+            <span class="label">VOORBEELD: THUISSITUATIE</span>
+            Tijdens de bpv had een van de manschappen een moeilijke thuissituatie. In overleg met collega's hebben we afgesproken hem naar huis te sturen en zijn taken die week over te nemen, zodat hij bij zijn familie kon zijn.
+          </div>
+          <div class="tag-row"><button class="tag tag-link" data-theory="dienend">Dienend leiderschap</button></div>
+        </div>
+
+      </div>
+
+      <div class="future-label"><span class="dot"></span>TOEKOMSTGERICHT: NOG NIET ERVAREN IN DE PRAKTIJK</div>
+      <div class="future-grid">
+        <div class="future-item">
+          <h4>Verlof toekennen</h4>
+          <p>Ik wil dit benaderen vanuit vertrouwen: mensen mogen grotendeels zelf aangeven wat ze nodig hebben, binnen duidelijke kaders die ik stel wanneer de planning dat écht vereist. Dit is vergelijkbaar met opdrachtgerichte commandovoering. Bij iemand die zijn verantwoordelijkheid al heeft bewezen, geef ik makkelijker ruimte.</p>
+        </div>
+        <div class="future-item">
+          <h4>Langdurig ziekteverzuim</h4>
+          <p>Ik wil niet alleen administratief afhandelen, maar persoonlijk betrokken blijven, net als bij de manschap met de moeilijke thuissituatie. Het welzijn van mijn mensen gaat voor de korte-termijnplanning.</p>
+        </div>
+        <div class="future-item">
+          <h4>Benaderbaarheid</h4>
+          <p>Ik wil een lage drempel combineren met duidelijke grenzen, zoals bij het verven: gezellig, maar ook streng wanneer nodig. Als mensen mij niet durven benaderen, verlies ik de informatie die actief volgerschap volgens de VLD juist vraagt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="besluitsimulator" class="dossier-section">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">05 · BESLUITSIMULATOR</div>
+        <h2>Hoe vertaalt visie zich naar een keuze?</h2>
+        <p class="lede" style="margin-top:16px;">Drie situaties uit mijn eigen ervaring. Geen van de opties is fout: kies wat jij zou doen, en bekijk daarna welke leiderschapsstijl erachter schuilt en waar mijn eigen keuze lag.</p>
+      </div>
+
+      <div class="scenario" data-scenario="1">
+        <div class="scenario-head"><span class="scenario-num">SCENARIO 01</span><h3>AMO-pelotonsaanval</h3></div>
+        <p class="scenario-situation">Je bent PC tijdens de eindoefening van de AMO op de KMA en moet een pelotonsaanval plannen en leiden. Je groepscommandant heeft weinig tijd voor de uitvoering. Wat doe je?</p>
+        <div class="options">
+          <button class="option-btn" data-desc="Dit weerspiegelt directief gedrag binnen het leiderschapscircumplex: duidelijkheid en controle staan voorop.">
+            <span class="letter">A</span><span>Geef precieze instructies over hoe de aanval uitgevoerd moet worden, zodat er geen ruimte voor twijfel is.</span>
+          </button>
+          <button class="option-btn" data-desc="Dit weerspiegelt opdrachtgerichte commandovoering: vertrouwen en ruimte in de uitvoering staan voorop.">
+            <span class="letter">B</span><span>Geef het doel en de kaders (het oogmerk) mee, en laat je groepscommandant zelf bepalen hoe hij het uitvoert.</span>
+          </button>
+          <button class="option-btn" data-desc="Dit weerspiegelt participatief gedrag binnen het leiderschapscircumplex: gezamenlijk draagvlak staat voorop.">
+            <span class="letter">C</span><span>Overleg eerst gezamenlijk met alle groepscommandanten voordat je een aanpak kiest.</span>
+          </button>
+        </div>
+        <div class="reveal">
+          <div class="reveal-block">
+            <div class="rb-label">JOUW KEUZE WEERSPIEGELT</div>
+            <p class="chosen-desc">···</p>
+          </div>
+          <div class="reveal-block mine">
+            <div class="rb-label">MIJN KEUZE: TOEN VS. NU</div>
+            <p>Tijdens deze oefening koos ik in de praktijk voor optie A: ik wilde zo graag dat het goed ging dat ik doorschoot in controle en te sturend werd naar mijn groepscommandanten. Nu zou ik voor optie B kiezen: meer vertrouwen en ruimte geven, en pas ingrijpen wanneer dat echt nodig is. Dat sluit aan bij dienend leiderschap en het besef dat opdrachtgerichte commandovoering vraagt om kaders te geven in het "wat", niet het "hoe".</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="scenario" data-scenario="2">
+        <div class="scenario-head"><span class="scenario-num">SCENARIO 02</span><h3>Verven</h3></div>
+        <p class="scenario-situation">Je bent net nieuw en als enige officier verantwoordelijk voor een verfklus met een deadline. Het team treuzelt. Wat doe je?</p>
+        <div class="options">
+          <button class="option-btn" data-desc="Dit weerspiegelt directief gedrag binnen het leiderschapscircumplex: resultaat en duidelijkheid staan voorop.">
+            <span class="letter">A</span><span>Spreek het team direct en streng aan op het treuzelen en de deadline.</span>
+          </button>
+          <button class="option-btn" data-desc="Dit weerspiegelt participatief gedrag binnen het leiderschapscircumplex, en sluit aan bij situationeel leiderschap: verbinding en voorbeeldgedrag staan voorop.">
+            <span class="letter">B</span><span>Werk zelf actief mee om het tempo te verhogen en het goede voorbeeld te geven.</span>
+          </button>
+          <button class="option-btn" data-desc="Dit weerspiegelt een sterk mensgerichte aanpak binnen het leiderschapscircumplex: vertrouwen opbouwen staat voorop.">
+            <span class="letter">C</span><span>Laat de planning even los en investeer eerst in de sfeer, in het besef dat de deadline kan schuiven.</span>
+          </button>
+        </div>
+        <div class="reveal">
+          <div class="reveal-block">
+            <div class="rb-label">JOUW KEUZE WEERSPIEGELT</div>
+            <p class="chosen-desc">···</p>
+          </div>
+          <div class="reveal-block mine">
+            <div class="rb-label">MIJN KEUZE: B, MET EEN VLEUG A</div>
+            <p>Ik koos vooral voor optie B: ik hielp actief mee met verven om het tempo te verhogen, en sprak het team daarnaast ook aan op het treuzelen omdat de deadline moest worden gehaald. Dit past bij zowel situationeel leiderschap als het leiderschapscircumplex: mijn gedrag (meehelpen) riep vergelijkbaar gedrag op bij het team, terwijl ik tegelijk moest kunnen schakelen tussen sturing en verbinding.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="scenario" data-scenario="3">
+        <div class="scenario-head"><span class="scenario-num">SCENARIO 03</span><h3>VRA's fout ingevuld</h3></div>
+        <p class="scenario-situation">Je leidinggevende merkt op dat het slecht is van de studenten die de VRA's fout hebben ingevuld, terwijl jij als PC verantwoordelijk was voor de controle. Wat doe je?</p>
+        <div class="options">
+          <button class="option-btn" data-desc="Verantwoordelijkheid blijft volledig bij wie de fout maakte.">
+            <span class="letter">A</span><span>Bevestig dat het inderdaad aan de studenten lag.</span>
+          </button>
+          <button class="option-btn" data-desc="Dit weerspiegelt eigenaarschap en dienend leiderschap: jezelf onder de groep plaatsen.">
+            <span class="letter">B</span><span>Geef aan dat jij als PC de controle had moeten doen, en dat het ook aan jou lag.</span>
+          </button>
+          <button class="option-btn" data-desc="Een afwachtende, passieve aanpak.">
+            <span class="letter">C</span><span>Zeg er niets over en laat de opmerking van je leidinggevende voor wat het is.</span>
+          </button>
+        </div>
+        <div class="reveal">
+          <div class="reveal-block">
+            <div class="rb-label">JOUW KEUZE WEERSPIEGELT</div>
+            <p class="chosen-desc">···</p>
+          </div>
+          <div class="reveal-block mine">
+            <div class="rb-label">MIJN KEUZE: B</div>
+            <p>Ik gaf aan dat het ook aan mij lag, omdat ik het niet goed had gecontroleerd. Mijn leidinggevende zag dat ik het hiermee opnam voor mijn groep, de groep zelf heeft dit niet gemerkt, dus ik deed het niet voor eigen gewin. Dit sluit aan bij eigenaarschap en authentiek leiderschap: weten wat je sterktes en zwaktes zijn, en die ook laten zien.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="eindoordeel" class="dossier-section">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">06 · EINDOORDEEL</div>
+        <h2>Zou jij deze leider volgen?</h2>
+        <p class="lede" style="margin-top:16px;">Leiderschapsvisie:</p>
+      </div>
+
+      <blockquote class="recap-quote">
+        "Ik wil een leider zijn die eerst dient en dan pas leidt: die vertrouwen geeft en verdient door zelf kwetsbaar te durven zijn, eigenaarschap toont in plaats van fouten af te schuiven, en zijn stijl aanpast aan wie voor hem staat. Ik geef ruimte in het 'hoe', maar blijf zelf verantwoordelijk voor het 'wat' en grijp in wanneer dat nodig is. Uiteindelijk stel ik de opdracht en mijn mensen boven mezelf, vanuit het besef dat leiderschap niet ontstaat uit rang, maar uit de interactie die ik met mijn mensen aanga."
+      </blockquote>
+
+      <div class="answer-grid">
+        <div class="answer-item">
+          <h4>Wat mag je van mij verwachten?</h4>
+          <p>Eerlijkheid, ook over mijn eigen fouten, ruimte om zelf verantwoordelijkheid te dragen, en dat ik zelf ingrijp als het echt nodig is.</p>
+        </div>
+        <div class="answer-item">
+          <h4>Wat verwacht ik van mijn team?</h4>
+          <p>Actief volgerschap: meedenken, mij aanspreken, en eigenaarschap tonen in plaats van fouten wegschuiven.</p>
+        </div>
+        <div class="answer-item">
+          <h4>Korte termijn</h4>
+          <p>In mijn eerste functie na de VTO wil ik benaderbaar en betrokken zijn, zoals bij het verven, maar tegelijk durven bijsturen. Aandachtspunt: niet doorschieten in vertrouwen geven.</p>
+        </div>
+        <div class="answer-item">
+          <h4>Lange termijn</h4>
+          <p>Dezelfde kern, dienend, vertrouwen, eigenaarschap, maar toegepast op grotere, meer indirecte aansturing.</p>
+        </div>
+      </div>
+
+      <div class="poll">
+        <h3>Zou jij deze leider volgen?</h3>
+        <div class="poll-options">
+          <button class="poll-btn" data-response="Fijn om te horen. Benieuwd wat voor jou de doorslag gaf: was dat vertrouwen, eigenaarschap, of iets anders uit dit dossier?">Ja</button>
+          <button class="poll-btn" data-response="Dat is eerlijk. Leiderschap overtuigt vaak pas in de praktijk, niet op een scherm. Dit dossier is een eerste indruk, geen garantie.">Twijfel</button>
+          <button class="poll-btn" data-response="Ook een waardevol antwoord. Welk onderdeel uit dit dossier zou je willen zien in de praktijk voordat je overtuigd bent?">Nog niet</button>
+        </div>
+        <p class="poll-response"></p>
+      </div>
+
+      <details class="sources">
+        <summary>Bronnen (9) <svg class="src-chev" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></summary>
+        <ol>
+          <li>Avolio, B. J., &amp; Gardner, W. L. (2005). Authentic leadership development: Getting to the root of positive forms of leadership. <em>The Leadership Quarterly, 16</em>(3), 315–338.</li>
+          <li>Walumbwa, F. O., Avolio, B. J., Gardner, W. L., Wernsing, T. S., &amp; Peterson, S. J. (2008). Authentic leadership: Development and validation of a theory-based measure. <em>Journal of Management, 34</em>(1), 89–126.</li>
+          <li>George, B., &amp; Sims, P. (2007). <em>True north: Discover your authentic leadership.</em> Jossey-Bass.</li>
+          <li>Greenleaf, R. K. (1977). <em>Servant leadership: A journey into the nature of legitimate power and greatness.</em> Paulist Press.</li>
+          <li>Van Dierendonck, D. (2011). Servant leadership: A review and synthesis. <em>Journal of Management, 37</em>(4), 1228–1261.</li>
+          <li>Blaber, P. (2008). <em>The Mission, the Men, and Me: Lessons from a Former Delta Force Commander.</em> Berkley Caliber.</li>
+          <li>Klaassens, R. (2025). <em>Je bent wat je doet: De situatie is een gegeven. Hoe je ermee omgaat is je karakter.</em> Nieuw Amsterdam.</li>
+          <li>Visie Leiderschap Defensie (2023). Ministerie van Defensie.</li>
+          <li>IK 2-1250, <em>Instructiekaart Leiderschap &amp; Teameffectiviteit</em>, ECLD, druk 3.</li>
+        </ol>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <span>LEIDERSCHAPSDOSSIER · PORTFOLIO OPDRACHT 6 · VTO GNK</span>
+    <span>TLNT H. NOBEL</span>
+  </div>
+</footer>
+
+<script>
+  var menuBtn = document.getElementById('menuBtn');
+  var mobileNav = document.getElementById('mobileNav');
+  menuBtn.addEventListener('click', function(){
+    var isOpen = mobileNav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', isOpen);
+  });
+  mobileNav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      mobileNav.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // scroll progress
+  var fill = document.getElementById('progressFill');
+  function updateProgress(){
+    var h = document.documentElement;
+    var scrolled = h.scrollTop;
+    var max = h.scrollHeight - h.clientHeight;
+    fill.style.width = (max > 0 ? (scrolled / max) * 100 : 0) + '%';
+  }
+  document.addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+
+  // active section highlighting
+  var navLinks = Array.from(document.querySelectorAll('nav.primary a'));
+  var sections = navLinks.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      var link = navLinks.find(function(a){ return a.getAttribute('href') === '#' + entry.target.id; });
+      if(!link) return;
+      if(entry.isIntersecting){
+        navLinks.forEach(function(a){ a.classList.remove('active'); });
+        link.classList.add('active');
+      }
+    });
+  }, {rootMargin:'-45% 0px -45% 0px'});
+  sections.forEach(function(s){ observer.observe(s); });
+
+  // theory accordion (leiderschapsintelligentie)
+  document.querySelectorAll('.theory-head').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btn.closest('.theory-item').classList.toggle('open');
+    });
+  });
+
+  // timeline (personeelsprofiel)
+  document.querySelectorAll('.timeline').forEach(function(tl){
+    tl.querySelectorAll('.timeline-nav button').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        tl.querySelectorAll('.timeline-nav button').forEach(function(b){ b.classList.remove('active'); });
+        tl.querySelectorAll('.timeline-panel').forEach(function(p){ p.classList.remove('active'); });
+        btn.classList.add('active');
+        tl.querySelector('#' + btn.dataset.target).classList.add('active');
+      });
+    });
+  });
+
+  // besluitsimulator
+  document.querySelectorAll('.scenario').forEach(function(sc){
+    var reveal = sc.querySelector('.reveal');
+    var descEl = reveal.querySelector('.chosen-desc');
+    sc.querySelectorAll('.option-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        sc.querySelectorAll('.option-btn').forEach(function(b){ b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        descEl.textContent = btn.dataset.desc;
+        reveal.classList.add('show');
+      });
+    });
+  });
+
+  // eindoordeel poll
+  document.querySelectorAll('.poll').forEach(function(poll){
+    var resp = poll.querySelector('.poll-response');
+    poll.querySelectorAll('.poll-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        poll.querySelectorAll('.poll-btn').forEach(function(b){ b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        resp.textContent = btn.dataset.response;
+        resp.classList.add('show');
+      });
+    });
+  });
+
+  // personeelsprofiel bron-tags: spring naar de bijbehorende theorie in hoofdstuk 2
+  document.querySelectorAll('.tag-link').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var target = document.querySelector('.theory-item[data-theory="' + btn.dataset.theory + '"]');
+      if(!target) return;
+      target.classList.add('open');
+      target.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  });
+</script>
+
+</body>
+</html>
